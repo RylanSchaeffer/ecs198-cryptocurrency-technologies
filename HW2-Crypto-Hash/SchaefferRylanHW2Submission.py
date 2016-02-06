@@ -21,7 +21,7 @@ def main(argv):
 
     # duplicate last item for odd number hashes
     if len(hashes) % 2 is 1:
-        hashes.append(list[-1])
+        hashes.append(hashes[-1])
 
     # iteratively calculate hash of children's hashes concatenated
     while len(hashes) != 1:
@@ -34,4 +34,6 @@ def main(argv):
     return root
 
 if __name__ == '__main__':
+    if len(sys.argv) is 2:
+        print "usage: python SchaefferRylanHw2Submission.py [transactions.txt]"
     main(sys.argv[1:])
