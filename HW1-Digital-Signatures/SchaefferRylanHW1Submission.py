@@ -3,6 +3,7 @@ __author__ = 'rylan'
 # import RSA module
 import rsa
 
+
 def main():
 
     # generate public and private keys
@@ -14,7 +15,7 @@ def main():
     # hash the message using SHA-256, then sign the hash using private key
     signature = rsa.sign(msg, privateKey, 'SHA-256')
 
-    # print message, signature and public key
+    # print message, signature and public key components
     print 'Message: ' + msg
     print 'Signature: ' + signature
     print 'Public Key (n): ' + str(publicKey.n)
