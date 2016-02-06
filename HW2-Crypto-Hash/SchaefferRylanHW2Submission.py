@@ -19,6 +19,10 @@ def main(argv):
     # hash each each transaction using SHA256
     hashes = map(hashlib.sha256, transactions)
 
+    # duplicate last item for odd number hashes
+    if len(hashes) % 2 is 1:
+        hashes.append(list[-1])
+
     # iteratively calculate hash of children's hashes concatenated
     while len(hashes) != 1:
         print len(hashes)
