@@ -3,7 +3,7 @@
 ##### Assignments
 1. Digital Signatures
 
-  Generate a public/private key pair. Submit your public key and a digital signature of the sentence, "I, <insert your name here>, signed this sentence!"  
+  Generate a public/private key pair. Submit your public key and a digital signature of the sentence, "I, [insert your name here], signed this sentence!"  
 
 2. Cryptographic Hash Functions/Merkle Trees
 
