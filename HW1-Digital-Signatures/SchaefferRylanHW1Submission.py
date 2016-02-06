@@ -14,6 +14,12 @@ def main():
     # hash the message using SHA-256, then sign the hash using private key
     signature = rsa.sign(msg, privateKey, 'SHA-256')
 
+    # print message, signature and public key
+    print 'Message: ' + msg
+    print 'Signature: ' + signature
+    print 'Public Key (n): ' + str(publicKey.n)
+    print 'Public Key (e): ' + str(publicKey.e)
+
     # return message, signature and public key
     return msg, signature, publicKey
 
