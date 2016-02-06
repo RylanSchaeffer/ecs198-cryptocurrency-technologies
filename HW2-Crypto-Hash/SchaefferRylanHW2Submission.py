@@ -2,28 +2,32 @@ __author__ = 'rylan'
 
 # import cryptographic hashing library
 import hashlib
+import sys
 
-transactions = [str(item) for item in range(0, 16)]
 
-def main(transactionFile):
+def main(argv):
 
     # open transaction file
-    file = open(transactionFile, 'r')
+    file = open(argv[0], 'r')
 
-    transactions = file.read().split('\n')
+    # split file into individual transactions
+    transactions = file.read().rstrip('\n').split('\n')
+
+    # close transaction file
+    file.close()
 
     # hash each each transaction using SHA256
-    hashTree = map(hashlib.sha256, transactions)
+    hashes = map(hashlib.sha256, transactions)
 
-    # iteratively calculate hash of children's hashes
-    while len(hashTree) != 1:
-        for leftHash, rightHash in zip(hashTree[0::2], hashTree[1::2]):
-            print leftHash, rightHash
-            hashTree = [hashlib.sha256(leftHash.hexdigest() + rightHash.hexdigest())]
+    # iteratively calculate hash of children's hashes concatenated
+    while len(hashes) != 1:
+        print len(hashes)
+        hashes = [hashlib.sha256(leftHash.hexdigest() + rightHash.hexdigest()) for leftHash, rightHash in zip(hashes[0::2], hashes[1::2])]
 
-    print hashTree
-
-    return hashTree
+    # print and return hexidecimal digest
+    root = hashes[0].hexdigest()
+    print 'Root hash: ' + root
+    return root
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:])
