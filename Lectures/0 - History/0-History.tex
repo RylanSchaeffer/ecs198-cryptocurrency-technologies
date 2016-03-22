@@ -1,0 +1,77 @@
+\title{\bf Lecture 0 - History and Relevance of Cryptocurrency Technologies\\}
+\author{\bf Rylan Schaeffer and Vincent Yang\\}
+\date{\bf \today \\}
+
+\documentclass{article}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-0.5in}
+
+\begin{document}
+\maketitle
+
+Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryptocurrency Technologies Spring 2015 course.
+
+\section*{Cryptocurrency}
+\begin{itemize}
+\item a digital currency in which cryptographic techniques are used to regulate the generation of units of currency and verify the transfer of funds
+\item cryptography : mathematical side of secure communication
+\item frequently operated independently of central authority, but not necessarily
+\item bank : term for central authority
+\end{itemize}
+
+\section*{Basic Modes of Trade}
+\begin{itemize}
+\item Barter - Simple, requires coordination
+\item Credit - Transferable obligations, requires introduction of risk
+\item Cash - Universally exchangeable, requires bootstrapping, anonymous
+\item Digital desirable for convenience
+\end{itemize}
+
+\section*{Digital Credit}
+\begin{itemize}
+\item Two Types:
+\subitem Direct e.g. Amazon
+\subitem Indirect e.g. PayPal
+
+\item Initially, sharing credit card details to unknown vendors over insecure channel seen as crazy
+
+\item FirstVirtual, 1994. Purely virtual office. Buyers enroll, provide credit card details. Buyer contacts seller. Seller contacts FirstVirtual, who contacts Buyer to confirm transaction.
+
+\item Secure Electronic Transaction, 1996. Communications protocol from VISA, MasterCard, private companies. Buyer and Seller agree on transaction. Buyer encrypts credit card info, transaction details, sends to Seller. Seller sends own view of transaction details, plus Buyer's encrypted information, to intermediary. Intermediary decrypts, confirms transaction.
+\end{itemize}
+
+
+\section*{Digital Cash}
+\begin{itemize}
+\item Three types
+\subitem Commodity - value in themselves e.g. gold, silver, salt
+\subitem Representative - claim on commodity e.g. redeemable for gold, silver
+\subitem Fiat - declared by government to be redeemable for services and goods e.g. Dollar, Euro
+
+\item Advantages to Credit
+\subitem No risk
+\subitem Decentralized : central authorities frequently aren't transparent/democratic, manipulate monetary policy with adverse economic effects
+\subitem Anonymous (somewhat)
+
+\item Two Key Problems
+\subitem Authentication i.e. no one other than person A can spend person A's money
+\subitem Double Spending i.e. person A cannot spend money multiple times
+
+\item David Chaum's Blind Signatures, 1983. Digital Signatures. Idea: Bank issues notes with serial numbers. Sellers check with bank to confirm that notes are not being double spent before confirming transactions.
+\subitem Chaum's contribution: when new note issued, recipient chooses serial number. Keeps number hidden from bank, and bank signs (``blind signature")
+
+\item Chaum, Fiat, Naor, 1988. Offline electronic cash. Allow double spending, focus on detecting. Every serial number is encoded. Each time coin is spent, recipient requires you to decode random subset and keeps a record. Still hides identity. When recipients go to bank to redeem notes, high probability that two random subsets will together decode your identity.
+
+\item Okamoto and Ohta allowed subdividing coins using Merkle trees
+
+\item Cypherpunks (community of activists advocating widespread use of strong cryptography as a route to social and political change) tried lots of versions
+\end{itemize}
+
+\end{document}
