@@ -1,0 +1,153 @@
+\documentclass{exam}
+\usepackage[utf8]{inputenc}
+\title{Homework 1}
+\author{Vincent Yang}
+
+\begin{document}
+\pagestyle{headandfoot}
+\runningheadrule
+\firstpageheader{ECS 198}{Homework 1}{April 7, 2016}
+\runningheader{ECS 198}
+              {Homework 1, Page \thepage\ of \numpages}
+              {April 7, 2016}
+\firstpagefooter{}{}{}
+\runningfooter{}{}{}
+\begin{tabular}{rl}
+Name:  & \rule{0.25\linewidth}{\linethickness} \\ 
+Date:  & \rule{0.25\linewidth}{\linethickness} \\ 
+\end{tabular}
+\vspace{5mm}
+
+{\let\newpage\relax\maketitle}
+
+\addpoints
+\begin{center}
+\gradetable[h][questions]
+\end{center}
+
+\begin{center}
+	\fbox{\fbox{\parbox{5.5in}{\centering
+	Answer the questions in the spaces provided.
+	If you run out of room for an answer, continue on the back of the page
+	}}}
+\end{center}
+
+
+\begin{questions}
+
+  \question[5] 
+  What is the purpose of Diffie-Hellman?
+  \fillwithlines{.75in}
+	\vspace{\stretch{1}}
+
+  \question[5]
+  What is the difference between Symmetric and Asymmetric Encryption?
+  \fillwithlines{.75in}
+	\vspace{\stretch{1}}
+
+  \question[15]
+  What are the two properties of Digital Signatures and why are they important?
+  \fillwithlines{1in}
+	\vspace{\stretch{1}}
+
+
+  \clearpage
+
+
+  \question[15]
+  What are the three properties of Cryptographic Hash Functions and why are they important?
+  \fillwithlines{1in}
+  \vspace{\stretch{1}}
+
+  \question[10]
+  What is the point of message digests?
+  \fillwithlines{.5in}
+  \vspace{\stretch{1}}
+
+  \question[2]
+  What is a Merkle-Damgard transform?
+  \begin{choices}
+    \choice A type of tree in which hashes are combined to make a root that can be used to verify
+    a hash's existence.
+    \choice A method of transforming variable length inputs to fixed length outputs
+    \choice A method of exchanging private keys publically
+    \choice A bitstring, determined by implementation, that the first block gets hashed with in SHA-256
+  \end{choices}
+
+  \question[2]
+  What is the pigeonhole principle?
+  \begin{choices}
+    \choice A method of brute force searching for Cryptographic Hash collisions
+    \choice A method of verifying a hash output given a key and message
+    \choice The state of having spread-out outputs for a Cryptographic Hash Function
+    \choice The idea that if the input sample space is larger than output sample space, collisions must exist
+  \end{choices}
+
+  \question[2] The \fillin[Birthday Paradox] is a phenomenon in which the probability of collisions rises much faster than expected.
+    
+  \question[2] A \fillin[Search Puzzle] is a math problem that requires searching a large amount to find a solution without shortcuts
+
+  \question[25] I am performing a Diffie Hellman Key Exchange with you. Given prime numbers 3 and 5, and secret numbers 18 and 23, 
+  what is our shared key?
+  \vspace{\stretch{5}}
+
+
+
+  \clearpage
+
+	\question Is it true that \(x^n + y^n = z^n\) if \(x,y,z\) and \(n\) are
+	positive integers?. Explain.
+
+	\vspace{\stretch{1}}
+	\question Is it true that \(x^n + y^n = z^n\) if \(x,y,z\) and \(n\) are positive integers?. Explain.
+	\vspace{\stretch{1}}
+
+	\question Prove that the real part of all non-trivial zeros of the function \(\zeta(z)\) is \(\frac{1}{2}\)
+	\vspace{\stretch{1}}
+	\clearpage
+
+	\question Compute \[\int_{0}^{\infty} \frac{\sin(x)}{x}\]
+	\vspace{\stretch{1}}
+	\question Which of these guys invented time
+
+	\begin{oneparchoices}
+		\choice Stephen Hawking 
+		\choice Albert Einstein
+		\choice Isaac Newton
+		\choice This makes no sense
+	\end{oneparchoices}
+
+	\question Which of these guys published a paper on Browninan Motion
+
+	\begin{checkboxes}
+		\choice Stephen Hawking 
+		\choice Albert Einstein
+		\choice Isaac Newton
+		\choice I don't know
+	\end{checkboxes} 
+
+	\clearpage
+
+	\question Given the equation \(x^n + y^n = z^n\) for \(x,y,z\) and \(n\) positive
+	integers. 
+	\begin{parts}
+		\part[10] For what values of $n$ is the statement in the previous question true?
+		\vspace{\stretch{1}}
+
+		\part[10] For $n=2$ there's a theorem with a special name. What's that name?
+		\vspace{\stretch{1}}
+
+
+		\part[10] What famous mathematician had an elegant proof for this theorem but there was
+		not enough space in the margin to write it down?
+		\vspace{\stretch{1}}
+
+	\end{parts}
+
+	\question[20] Compute \[\int_{0}^{\infty} \frac{\sin(x)}{x}\]
+
+	\vspace{\stretch{1}}
+\end{questions}
+
+
+\end{document}
