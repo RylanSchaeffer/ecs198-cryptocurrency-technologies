@@ -22,10 +22,60 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
 \begin{itemize}
 \item Set : group of objects represented as a unit
 \item Alphabet : finite, non-empty set
-\item 
+\item String : finite sequence of characters from common alphabet, including empty string $\varepsilon$
+\item Language : set of strings over common alphabet
 \end{itemize}
 
 \section*{Hash Functions}
+\begin{itemize}
+\item $H: \{0,1\}^* \rightarrow \{0,1\}^k$, for fixed k e.g. 256
+\item Should be efficiently computable O(n)
+\item Example: mod operator
+\end{itemize}
 
+\section*{Cryptographic Hash Function}
+Two additional properties
+\begin{itemize}
+\item Collision Resistant: Computationally infeasible to find $x, y$ such that $x \neq y$ and $H(x) = H(y)$
+\subitem mod operator is not collision resistant
+\subitem collisions exist by pigeonhole principle - hence, computationally infeasible
+\subitem birthday paradox reduces difficulty of finding collisions
+\subitem can also call "binding," since once hash is published, you cannot replace input value with another input value without modifying the hash output
 
+\item Hiding: Computationally infeasible to find $x$ given $H_{given}$ such that $H(x) = H_{given}$
+\subitem Frequently, cryptographic hash functions will be called one-way hash functions
+\subitem Frequently, message space is too small. Append nonce (i.e. random value) r to grow message space such that computationally infeasible to find $x$ such that $H(x|r) = H_{given}$
+
+\end{itemize}
+
+\section*{Applications}
+\begin{itemize}
+\item Message Digest
+\subitem Create summary (or ``digest") of block of text
+\subitem Suppose I have $msg$ and $H$ is a cryptographic hash function. Then I know that $H(msg)$ or perhaps $H(msg|r)$ (where r is a random value and is needed because the message is predictable), will produce a hash value that no other block of text will.
+\subitem Example: cryptographic checksums
+\item Commitments
+\subitem Analogous to sealed envelope on the table
+\subitem Hiding ensures no one can "reverse engineer" the contents. Collision-resistant guarantees to the other party that you are bound to the value you initially put in.
+\end{itemize}
+
+\section*{Puzzle Friendliness}
+\begin{itemize}
+\item Search Puzzle
+\subitem Given $H$, target set $Y$, and value $x$
+\subitem Goal: find r such that $H(x|r) \in Y$
+\item Puzzle friendly if no solving strategy for puzzle other than trying random guesses at $r$
+\item Examples: $0|\{0,1\}^{k-1}$, $00|\{0,1\}^{k-1}$, $000|\{0,1\}^{k-1}$
+\subitem P(l leading zeroes) = $\frac{1}{2^l}$, can use geometric distribution's cumulative distribution function to model likelihood of observing a ``hit" after a given number of failures
+\item Useful for mining, which we will get to later
+\end{itemize}
+
+\section*{Hash Structures}
+\begin{itemize}
+\item Hash pointer : hash of data. Gives way to verify information hasn't changed, much like pointer gives a way to retrieve location of information
+\item Hash linked list (block chain) : Each block has hash of previous block plus new data. Head is hash of most recent block.
+\subitem Tamper-evident log
+\item Hash tree (Merkle Tree) : binary tree of data blocks. Proof of membership and proof of non-membership in $log(n)$, so faster than hash linked list. Can also sort.
+\item Can combine. Block chain is usually hash linked list of hash trees 
+\end{itemize}
 \end{document}
