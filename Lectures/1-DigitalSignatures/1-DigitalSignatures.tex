@@ -82,6 +82,18 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
     \subitem $ isValid := verify(pk, message, sig) $ Deterministic Decryption Algorithm
   \item Ensure only one person can decrypt your message
   \item Ensure a message was created by someone
+  \item Unforgeability Game
+    \subitem Challenger has $ (sk,\ pk) $ and attacker has $ pk $.
+    \subitem Attacker can send over $ m_0, m_1, m_2... m_n $ and get back $ sign(sk, m_0) $.
+    \subitem Attacker has to send $ M,\ sig $ where $ M \notin {m_0, m_1, m_2, ...m_n} $.
+    \subitem Challenger verifies: $ verify(pk, M, sig) $.
+    \subitem Existential Forgery: Creation of a message/signature pair $(m, \sigma)$, where $\sigma$ isn't created by signer.
+    \subitem Existentially Unforgeable: The chance of successfully forging a message is negligible to the point that
+    it will never happen in practice.
+  \item Other types of Forgery for signatures:
+      \subitem Multiplication Forgery
+      \subitem Selective Forgery
+      \subitem Universal Forgery
   \item RSA
     \subitem Ron Rivest, Adi Shamir, Leonard Adleman
     \begin{itemize}

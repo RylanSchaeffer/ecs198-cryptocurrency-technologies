@@ -1,0 +1,166 @@
+\title{\bf ECS 198 - Cryptocurrency Technologies \\ Course Syllabus\\
+Spring 2016}
+\date{\vspace{-5ex}}
+
+
+\documentclass{article}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\usepackage{enumerate}
+\usepackage{tabularx} % in the preamble
+\usepackage{amsmath}
+\usepackage{hyperref}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-0.5in}
+
+\begin{document}
+\maketitle
+
+\section*{Course Information}
+Student Facilitator: Rylan Schaeffer, Vincent Yang\\
+Contact Information: ryschaeffer@ucdavis.edu, vinyang@ucdavis.edu\\
+Faculty Mentor: Karl Levitt\\
+Contact Information: levitt@cs.ucdavis.edu\\
+Credit: 2 unit\\
+Grading: P/NP \\
+CRN: 64022 \\
+Meetings: TR 4:10 - 5:00 PM \\
+Location: Olson 147 
+
+
+\section*{Course Description}
+
+In 2008, Satoshi Nakamoto published ``Bitcoin: A Peer-to-Peer Electronic Cash System," detailing how cryptographic primitives and distributed consensus protocols could be combined to create an online, decentralized payment system. Although digital currencies had long been of interest to the computer science, financial and cypherpunk communities, Nakamoto's paper sparked further research on the security, anonymity and utility of Bitcoin and other cryptocurrencies.\\
+
+\noindent Note: This course is based on Princeton University's ``Bitcoin and Cryptocurrency Technologies" course.
+
+\section*{Course Goals}
+
+This course aims to introduce interested students to cryptographic primitives, demonstrate how cryptographic primitives can be leveraged to construct secure electronic currencies like Bitcoin, and explore how the core principles can be leveraged in other areas and future pursuits.
+
+\section*{Prerequisites}
+
+ECS 60 is recommended, 20 and 40 required. If you have not taken those courses, but are interested in the course and are willing to spend extra time learning the background material, please contact Rylan and Vincent.
+
+\pagebreak
+
+\section*{Course Outline}
+
+In general, Thursdays will be when programs are due and the next programs released. Lecture on Thursday will be used to introduce material necessary to start the new assignments, while lectures the following Tuesdays will be "Labs," used to finish unfinished lectures, answer questions on the assignments, and if time permits, allow students to work on the assignments. Programs will be due before class on Thursday so as not to detract from the new week's material.\newline
+
+\begin{tabularx}{\textwidth}{c|c}
+\hline
+Date & Content\\
+\hline
+3/29 & Course Overview; History and Relevance of Cryptocurrency Technologies\\
+3/31 & Digital Signatures; Program 1 Released\\
+4/5 & Lab\\
+4/7 & Cryptographic Hash Functions and Data Structures; Program 1 Due; Program 2 Released\\
+4/12 & Lab\\
+4/14 & Centralized Cryptocurrencies; Program 2 Due; Program 3 Released\\
+4/19 & Lab\\
+4/21 & Decentralization through Distributed Consensus; Program 3 Due; Program 4 Released\\
+4/26 & Lab\\
+4/28 & Cryptocurrency Applications; Program 4 Due; Program 5 Released\\
+5/3 & Lab\\
+5/5 & Engineering Details\\
+5/10 & Lab\\
+5/12 & Anonymity, Pseudonymity, Unlinkability; Program 5 Due; Project or Program 6 Released\\
+5/17 & Lab\\
+5/19 & Zero-Knowledge Proof Cryptocurrencies\\
+5/24 & Lab\\
+5/26 & Cryptocurrency Technologies; Project or Program 6 Checkpoint\\
+5/31 & Lab\\
+6/2 & Future Directions or Project Presentations; if Program 6, Program 6 due\\
+
+\end{tabularx}
+
+\bigskip \bigskip
+
+A more detailed description of the course material is below. Please note that the material is likely to change, based on the pace of the class.
+
+\begin{enumerate}
+\item Introduction to Cryptography
+\subitem Digital Signatures
+\subitem Cryptographic Hash Functions
+
+\item Cryptographic Data Structures
+\subitem Hash Pointers
+\subitem Append-Only Ledgers (Block Chains)
+\subitem Merkle Trees
+
+\item Bitcoin's Protocol
+\subitem Keys as Identities
+\subitem Simple Cryptocurrencies
+\subitem Decentralization through Distributed Consensus
+\subitem Incentives
+\subitem Proof of Work (Mining)
+\subsubitem Application-Specific Integrated Circuit (ASIC) Mining and ASIC-resistant Mining
+\subsubitem Virtual Mining (Peercoin)
+
+\item Engineering Details
+\subitem Bitcoin Blocks
+\subitem Hot and Cold Storage
+\subitem Splitting and Sharing Keys
+\subitem Proof of Reserve
+\subitem Proof of Liabilities
+
+\item Anonymity, Pseudonymity, Unlinkability
+\subitem Statistical Attacks (Transaction Graph Analysis)
+\subitem Network-layer De-anonymization
+\subitem Chaum's Blind Signatures
+\subitem Single Mix and Mix Chains
+\subitem Decentralized Mixing
+\subitem Zero-Knowledge Proof Cryptocurrencies
+
+\item Cryptocurrency Technologies (Note: Only some of the following will be covered)
+\subitem Smart Property
+\subitem Efficient micro-payments
+\subitem Coupling Transactions and Payment (Interdependent Transactions)
+\subitem Public Randomness Source
+\subitem Prediction Markets
+\subitem Escrow transactions
+\subitem Green addresses
+\subitem Auctions and Markets
+\subitem Multi-party Lotteries
+
+\end{enumerate}
+
+\section*{Required Texts \& Materials}
+
+\textbf{Bitcoin and Cryptocurrency Technologies}. Arvind Narayanan, Joseph Bonneau, Edward Felten, Andrew Miller, Steven Goldfeder and Jeremy Clark. Available free online at \url{http://piazza.com/princeton/spring2015/btctech/resources}\\
+
+\noindent \textbf{Bitcoin: A Peer-to-Peer Electronic Cash System}. Satoshi Nakamoto. Available free online at \url{https://bitcoin.org/bitcoin.pdf}\\
+
+\noindent \textbf{How the Bitcoin protocol actually works}. Michael Nielsen. Available free online at \url{http://www.michaelnielsen.org/ddi/how-the-bitcoin-protocol-actually-works/}
+
+\pagebreak
+
+\section*{Grading \& Other Policies}
+
+All programs will be in Python. Grades will be determined as follows:
+\begin{enumerate}
+\item Attendance and Participation - 20\% (20 class meetings, 1\% each).
+\item Program 1 - 7.5 \%
+\subitem Generate a private/public key pair. Submit your public key and a digital signature of the sentence ``I, $<$insert name here$>$, signed this sentence!"
+\item Program 2 - 7.5\%
+\subitem Submit a program that accepts a string of transactions, and outputs a hash tree of the transactions.
+\item Program 3 - 10\%
+\subitem Submit a program that accepts a list of transactions over a number of epochs and outputs a list of valid transactions for each epoch.
+\item Program 4 - 10\% 
+\subitem Submit a program that accepts a list of transactions and an integer n, and outputs the value of a nonce such that hash(root of hash tree|nonce) has n leading zeroes
+\subitem Submit a program that accepts a list of transactions, a nonce and an integer n, and verifies that hash(root of hash tree|nonce) has n leading zeroes
+\item Program 5 - 15\%
+\subitem Submit a program that accepts a block chain and a list of transactions or a hash tree and nonce over a number of epochs, and then, for each epoch, verifies the hash tree and none or mines the list of transactions and appends valid transactions to the block chain
+\item Project or Program 6 - 30\%
+\subitem To be decided. This will likely consist either of being asked to select, research and deliver a presentation on a new topic in the field of cryptocurrency technologies, or create a fully-working cryptocurrency.
+
+\end{enumerate}
+
+\noindent Late Policy: No late assignments will be accepted. However, if a personal emergency arises, or if multiple assignments/tests coincide, please talk to me in advance to set up a workaround. I want you to learn in my class, and I don't want students dropping or failing because they need to prioritize their major-required courses and the like.\\
+
+\noindent Accessibility Policy: Any student who may need an accommodation based on the impact of a disability should contact me privately to discuss his or her specific needs. In addition, the student should contact the Student Disability Center (SDC) at (530) 752-3184, sdc@ucdavis.edu as soon as possible to better ensure that such accommodations can be implemented in a timely fashion.\\
+
+\end{document}
