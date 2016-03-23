@@ -18,5 +18,132 @@
 
 Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryptocurrency Technologies Spring 2015 course.
 
+\section*{Cryptography}
+\begin{itemize}
+  \item If you want to make information secret, hide its existence or make it intelligible
+  \item Symmetric and Asymmetric Cryptography
+\end{itemize}
+
+\section*{Symmetric Cryptography}
+\begin{itemize}
+  \item An encryption scheme \emph{SE = (K, E, D)} in which the sender and receiver use the same key to encrypt and decrypt information.
+    \subitem Randomized \emph{key generation} algorithm \emph{K} that returns a string \emph{k}. \emph{Keys(SE)}  is the set of possible bitstrings that \emph{K} can output (keys).
+    \subitem \emph{Encryption Algorithm}  \emph{E} that takes a key \emph{k} $ \in $ \emph{K}.
+    \subitem \emph{decryption} algorithm \emph{D} that inputs a key \emph{k} $ \in $ \emph{Keys(SE)} and
+    \emph{plaintext} \emph{M} $ \in  \{0, 1\}* $.\\ 
+    $ M \gets D\textsubscript{K}(C) $
+  \item Message Space
+    \subitem The set of possible messages
+    \subitem Key Space
+    \subitem Ciphertext Space/Cipher Space
+  \item Caesar Cipher
+  \item One Time Pad
+  \item Diffie-Hellman Key Exchange
+    \subitem A method of publically creating cryptographic keys.
+    \subitem Trapdoor Function: A function that is easy to compute in one direction, but not the other.
+    \subitem Perfect Forward Secrecy: The property in which compromised long-term keys do not invalidate the 
+    integrity of a session key.
+\end{itemize}
+
+\section*{Asymmetric Cryptography}
+\begin{itemize}
+  \item Properties
+    \subitem Only you can create a signature, but anyone can verify its validity
+    \subitem Tied to a document
+    \subitem Ex: Actual mail
+  \item Public/Private keys
+  \item Digital signature scheme
+    \subitem $ (sk, pk) := generateKeys(keySize) $ Randomized key generation
+    \subitem $ sig := sign(sk, message) $ Encryption Algorithm
+    \subitem $ isValid := verify(pk, message, sig) $ Deterministic Decryption Algorithm
+  \item Ensure only one person can decrypt your message
+  \item Ensure a message was created by someone
+  \item RSA
+    \subitem Ron Rivest, Adi Shamir, Leonard Adleman
+    \begin{itemize}
+      \item Basic Principle: $ (m\textsuperscript{e})\textsuperscript{d}\ mod\ n = m $
+        \subitem Even with \emph{m}, \emph{e}, and \emph{n}, it is extremely difficult to find \emph{d}.
+      \item Key Distribution
+        \subitem Distribute public key $ (n, e) $. 
+      \item Encryption
+        \subitem Change \emph{M} to integer \emph{m}. Make sure $ 0 \leq m < n $ and $ gcd(m, n) = 1 $ through an agreed padding scheme.
+        \subitem Compute ciphertext \emph{c} through $ c \equiv (m\textsuperscript{e})\textsuperscript{d} \equiv m\ mod\ n $
+      \item Decryption
+        \subitem Use private key exponent \emph{d} with $ c\textsuperscript{d} \equiv (m\textsuperscript{e})\textsuperscript{d} \equiv m\ mod\ n $
+        \subitem Then, reverse emph{m} to \emph{M} using the padding scheme.
+
+      \item Key Generation
+        \subitem Choose different prime numbers \emph{p} and \emph{q}. Find $ n = pq $.
+        \subitem \emph{n} is the key. $ len(n) = keyLength $.
+        \subitem Find $ \phi(n) $.
+        \begin{enumerate}
+          \item Choose two large, different primes $ p $ and $ q $. Find $ n = p \cdot q $
+            \subitem \emph{n} is the key. $ len(n) = key_length $.
+          \item Find $ \phi(n) $. This turns out to be $ (p - 1) (q - 1) $
+            \subitem $ \phi $ is Euler's totient function. $ \phi(n) $ is the number of
+            positive integers less than $ n $ that are coprime to $ n $. $ \phi(1) = 1$.
+            \subitem Two numbers are \emph{Coprime} when the only positive integer that divides them is $ 1 $. 
+            \subitem Given $ n $, a prime number, $ \phi(n) = n-1 $. e.g. $ n = 5 $, so $ 1, 2, 3, 4 $ are coprime to $ 5 $. 
+            \begin{enumerate}
+              \item However, for composite numbers, it works for some but not others. 
+              \item e.g. $ 15 = 3 \cdot 5 $ and $ \phi(15) = \phi(3) \cdot \phi(5) = 2 \cdot 4 = 8 $. 
+              \item But doesn't hold for 4, 8, 9. 
+            \end{enumerate}
+            \subitem If \emph{m} and \emph{n} are coprime, $ \phi(m \cdot n) = \phi(m) \cdot \phi(n) $.
+          \item Find an integer \emph{e} where $ 1 < e < \phi(n) $ and $ gcd(e, \phi(n)) = 1 $. This means \emph{e} and $ \phi{n} $ are coprime.
+          \item Find \emph{d}, the modular multiplicative inverse of $ e(mod\ \phi(n)) $
+            \subitem This means: Solve for \emph{d} where $ d \cdot e \equiv 1\ (mod\ \phi(n)) $
+            \subitem \emph{e} should have short length, and is usually $ 2\textsuperscript{16} + 1 = 65,537 $.
+            \subitem \emph{e} is the public key, along with \emph{n}.
+            \subitem \emph{d} is the private key.
+        \end{enumerate}
+      \item Example:
+        \begin{enumerate}
+          \item Find two distinct prime numbers
+            \subitem $ p = 11 $ and $ q = 7 $
+          \item Find $ n = pq $
+            \subitem $ n = 11 \cdot 7 = 77 $
+          \item Compute the totient of n
+            \subitem $ \phi(77) = (11 - 1)(7 - 1) = 60 $
+          \item Choose \emph{e} such that $ 1 < e < 60 $, where \emph{e} is coprime to \emph{60}. 
+            \subitem Let $ e = 17 $; check that $ 60 $ is not divisible by $ 17 $.
+          \item Compute \emph{d}. Process is below.
+            \subitem $ d = 53 $
+            \subitem $ d \cdot e\ mod\ \phi(n) = 1 $
+            \subitem $ 53 \cdot 17\ mod\ 60 = 1 $
+          \item The public key is $ n = 77 $ and $ e = 17 $. 
+            \subitem $ c(m) = m\textsuperscript{17}\ mod\ 77 $
+          \item The private key is $ d = 53 $.
+            \subitem $ m(c) = c\textsuperscript{53}\ mod\ 77 $
+          \item To encrypt $ m = 65 $, 
+            \subitem $ c = 65\textsuperscript{17}\ mod\ 77 = 32 $
+          \item To decrypt $ c = 32 $, 
+            \subitem $ m = 32\textsuperscript{53}\ mod\ 77\ = 65 $. 
+        \end{enumerate}
+      \item Calculating d for above: use Extended Euclid's Algorithm 
+        \subitem Basically finding $ gcd $ with Euclid's Algorithm, but reversed.
+    \subitem $ \phi(77) = 60 $
+    \subitem $ e \cdot d\ mod\ 60 = 1 $
+    \subitem $ 17 \cdot d\ mod\ 60 = 1 $
+    \subitem $ 60 = 3(17) + 9 $
+    \subitem $ 17 = 1(9) + 8 $
+    \subitem $ 9 = 1(8) + 1 $
+    \subitem Once we hit 1, rewrite as:
+    \subitem $ 1 = 9 - 1(8) $
+    \subitem $ 8 = 2(9) - 17 $
+    \subitem $ 9 = 60 - 3(17) $
+    \subitem Therefore,
+    \subitem $ 1 = 9 - (17 - 1(9)) $
+    \subitem $ 1 = 2(9) - 17 $
+    \subitem $ 1 = 2(60 - 3(17)) - 17 $
+    \subitem $ 1 = 2(60) - 7(17) $
+    \subitem $ \phi(77) - 7 = d $
+    \subitem $ d = 53 $
+  \end{itemize}
+
+
+\end{itemize}
+
+
 
 \end{document}
