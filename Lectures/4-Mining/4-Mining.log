@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.28)  5 APR 2016 13:22
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.6.28)  6 APR 2016 10:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**2-CryptoHash.tex
-(./2-CryptoHash.tex
+**4-Mining.tex
+(./4-Mining.tex
 LaTeX2e <2011/06/27>
 Babel <3.9h> and hyphenation patterns for 31 languages loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -117,8 +117,8 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen112
 \Gin@req@width=\dimen113
 )
-(./2-CryptoHash.aux)
-\openout1 = `2-CryptoHash.aux'.
+(./4-Mining.aux)
+\openout1 = `4-Mining.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
 LaTeX Font Info:    ... okay on input line 16.
@@ -132,8 +132,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
 LaTeX Font Info:    ... okay on input line 16.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
 LaTeX Font Info:    ... okay on input line 16.
-
-(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+ (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count100
 \scratchdimen=\dimen114
@@ -201,30 +200,38 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 23.
- [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] (./2-CryptoHash.aux) )
- 
+Overfull \hbox (6.37492pt too wide) in paragraph at lines 27--28
+[]\OT1/cmr/m/n/10 Accomplished through hash puz-zles i.e. cal-cu-late nonce $\O
+ML/cmm/m/it/10 r$ \OT1/cmr/m/n/10 such that $\OML/cmm/m/it/10 H\OT1/cmr/m/n/10 
+(\OML/cmm/m/it/10 previoushash\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 tx[]\OMS/cmsy/
+m/n/10 j\OML/cmm/m/it/10 tx[]\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 :::\OMS/cmsy/m/
+n/10 j\OML/cmm/m/it/10 tx[]\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 tx[]\OMS/cmsy/m/n
+/10 j\OML/cmm/m/it/10 r\OT1/cmr/m/n/10 )$
+ []
+
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4]
+(./4-Mining.aux) ) 
 Here is how much of TeX's memory you used:
- 2123 strings out of 494368
- 28591 string characters out of 6163629
- 89454 words of memory out of 5000000
- 5368 multiletter control sequences out of 15000+600000
+ 2124 strings out of 494368
+ 28561 string characters out of 6163629
+ 89477 words of memory out of 5000000
+ 5369 multiletter control sequences out of 15000+600000
  9022 words of font info for 33 fonts, out of 8000000 for 9000
  398 hyphenation exceptions out of 8191
- 37i,6n,23p,276b,232s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmsy7.pfb>
-Output written on 2-CryptoHash.pdf (2 pages, 88376 bytes).
+ 37i,6n,23p,280b,232s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi1
+0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on 4-Mining.pdf (4 pages, 81745 bytes).
 PDF statistics:
- 43 PDF objects out of 1000 (max. 8388607)
- 30 compressed objects within 1 object stream
+ 41 PDF objects out of 1000 (max. 8388607)
+ 28 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

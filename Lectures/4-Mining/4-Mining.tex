@@ -1,0 +1,140 @@
+\title{\bf Lecture 4 - Mining Incentives, Challenges and Future Directions\\}
+\author{\bf Rylan Schaeffer and Vincent Yang\\}
+\date{\bf \today \\}
+
+\documentclass{article}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-0.5in}
+
+\begin{document}
+\maketitle
+
+Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryptocurrency Technologies Spring 2015 course.
+
+\section*{Review}
+\begin{itemize}
+\item Need method to achieve distributed consensus
+\item One option is proof-of-work, in which we balance two opposing goals:
+\subitem challenging to validate transactions, to prevent interference
+\subitem rewarding to validate transactions, to encourage people to participate
+\item Accomplished through hash puzzles i.e. calculate nonce $r$ such that $H(previous hash | tx_1 | tx_2 | ... | tx_n | tx_s | r)$ has target number of leading zeroes
+\item Two incentives:
+\subitem Block reward i.e. $tx_s$ is a new coin
+\subitem Transaction fees
+\end{itemize}
+
+\section*{To Be A Miner}
+\begin{enumerate}
+\item Listen for transactions
+\item Maintain block chain and listen for new blocks
+\item Assemble new block
+\item Mine that block i.e. find the nonce $r$
+\item Hope your block is accepted
+\item Profit
+\end{enumerate}
+
+Note: Not all miners are working on the same problem! Miners (almost) always have unique set of transactions. Even if the transactions are identical, they're trying to send the transaction rewards and new block to themselves.
+
+Protocol dictates that, on average, mining a new block should take about 10 minutes, adjusted about every two weeks.
+
+\section{Mining Hardware}
+\begin{itemize}
+\item SHA-256 requires 32-bit words, 32-bit modular addition, some bitwise logic
+\item Central Processing Unit mining works, but is slow
+\item Graphics Processing Unit mining is faster, but wastes floating point unit and consumes more power.
+\item Field-Programmable Gate Arrays mining is comparable to GPUs, better with bitwise logic, can be easily packed together, can be controlled from one centralized unit. Difficult to optimize 32-bit step addition
+\item Application-Specific Integrated Circuits: best of all possible worlds
+\end{itemize}
+
+\section{Mining Costs}
+\begin{itemize}
+\item Technology quickly becomes antiquated
+\item Cheaper in cold locations with cheap electricity
+\item Shifted to professional companies
+\end{itemize}
+
+\section{Succeeding as a Miner}
+Suppose you spent \$6,000 on mining rig. Assuming you expect to find one block per 14 months, worth 25 bitcoins.
+\begin{itemize}
+\item Model as Poisson process
+\item Reduced variance when mining together
+\end{itemize}
+
+\section{Mining as a Group}
+\begin{itemize}
+\item Track each person's computational contribution, using "near misses" as a proxy measurement
+\item Model 1: Pay per share. Pool manager pays flat fee per near miss above a set difficulty. No incentive to send valid blocks. High risk for pool manager.
+\item Model 2: Pay proportionally. Low risk for pool manager.
+\item (Display mining consolidation visually)
+\end{itemize}
+
+\section{Pros and Cons of Mining}
+\begin{itemize}
+\item Allow individuals and groups to make money, where otherwise impossible
+\item Threatens stability of Bitcoin, since mining pools are a form of centralization
+\end{itemize}
+
+\section{Incentives and Strategies}
+\begin{itemize}
+\item Much game theory, including
+\subitem which transactions to include
+\subitem which block to mine on
+\subitem choosing between blocks of the same height
+\subitem when to announce new blocks
+\item Forking attack: Double spending possible if thief controls >51\% of the network. Spends money, seller accepts because chain is long enough, then thief extends alternative chain, effectively erasing the previous transaction. May not require 51\%
+\item Block-withholding attack: Solve a block, wait til someone else solves a block, then release yours to prevent their from being accepted. Increases your effective share of rewards.
+\item Blacklisting: Can refuse to process transactions from certain public keys
+\end{itemize}
+
+
+
+\section{Alternatives to Mining Puzzles}
+\begin{itemize}
+\item Solving puzzles takes tremendous energy which is basically wasted
+\item Alternative puzzle requirements:
+\subitem Easy to verify solutions
+\subitem Adjustable difficulty to control rate of mining
+\subitem ``Program freeness": chances of winning should be proportional to computational power. Also known as memoryless process.
+\item ASIC Resistant Puzzles
+\subitem Goal: Decentivize consolidation by making individual computers competitive with ASICs.
+\subitem Method: memory-hard puzzles i.e. puzzles that require large amount of memory to solve or memory-bound puzzles i.e. puzzles that are slowed down by memory access time.
+\subitem Example: Scrypt. Used in Lytecoin. Two steps. 
+\subsubitem 1) fill large buffer of RAM with pseudorandom data i.e. for i = 1 to N: V[i] = SHA-256(V[i-1])
+\subsubitem 2) read and update the memory in pseudorandom order i.e. X = SHA-256(V[N-1]). for i = 1 to N, {j = X \% N; X = SHA-256(X \string^ V[j])}
+\subsubitem Memory-hard because if V isn't stored in memory, recomputing X = SHA-256(X \string^ V[j]) takes $O(n^2)$ instead of $O(n)$ as $j$ is generated pseudorandomly.
+\subsubitem Unfortunately, requires as much money to verify as does to compute
+\subsubitem Eventually Litecoin revealed that Scrypt ASICs were better than ordinary hashing ASICs
+\subitem Example: Cuckoo Cycle. Based on difficulty of finding cycles in a graph generated from a cuckoo hash table.
+\item Moving Target Puzzles: change puzzles occasionally so that ASICs are worthless
+\end{itemize}
+
+\section{Proof-of-Useful-Work}
+Idea: Use computing energy for some benefit to society instead of wasting it. Examples include:
+\begin{itemize}
+\item Distributed computing projects e.g. SETI at Home, Folding at Home (protein structure folding)
+\subitem Problem: solution space was not equiprobable
+\item Great Internet Mersenne Prime Search
+\subitem Problem: solutions too rare
+\end{itemize}
+
+Primecoin uses proof-of-useful work, by requiring miners to find Cunningham chains of prime numbers. Questionable how useful this is.
+
+\section{Proof-of-Storage}
+Idea: use miners' storage power to help with some archival project/distributed computing problem
+
+Used in Permacoin as follows:
+
+\begin{itemize}
+\item Let $F$ be a large file that we want stored e.g. Large Hadron Collider backup data of several hundred petabytes
+\item 
+\end{itemize}
+
+chapter 8. to be finished...
+\end{document}
