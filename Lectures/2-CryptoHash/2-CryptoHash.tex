@@ -7,6 +7,7 @@
 \usepackage{enumerate}
 \PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{hyperref}
 \usepackage{graphicx}
 \setlength{\oddsidemargin}{0in}
@@ -22,6 +23,20 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
 
 \section*{Terms}
 \begin{itemize}
+\item Set : group of objects represented as a unit. enumerate, or give way to determine membership in set
+\subitem Empty set = set with 0 members
+\subitem Cartesian Product or Cross Product (x): tuples of all possible pairs
+\item Alphabet : finite, non-empty set
+\item String : finite sequence of characters from common alphabet
+\subitem empty string $\varepsilon$ (string of length zero)
+\subitem concatenation by joining or $|$, can use exponent for repeat concatenation
+\item Language : set of strings over common alphabet
+\item Kleene star (Kleene operator, Kleene closure) : either on sets of strings or sets of characters. Means "zero or more". More formally:
+\subitem $V_0 = \{\varepsilon\}$
+\subitem $V_1 = V$
+\subitem $V_{i+1} = \{ wv : w \in V_i and v \in V \}$ for i $>$ 0
+\subitem $V^* = \bigcup\limits_{i \in \mathbb{N}} V_i$
+=======
   \item Set : group of objects represented as a unit
   \item Alphabet : finite, non-empty set
   \item String : finite sequence of characters from common alphabet, including empty string $\varepsilon$
@@ -97,6 +112,16 @@ Two additional properties
     \end{center}
 \end{itemize}
 
+\section*{Actual Cryptographic Hash Functions}
+\begin{itemize}
+\item Turns out, creating ideal cryptographic hash function is difficult
+\item Ron Rivest invented MD4 and MD5 in 1990 and 1991, collisions found
+\item SHA-1 designed by NSA in 1993, replaced in 1995. 2005 cryptanalysts found collisions, by 2010 organizations refuse to accept e.g. Google, Microsoft
+\item SHA-2 designed by NSA. 2001. Family of functions with different possible digest lengths including 224, 256, 384, 512.
+\subitem SHA-256 uses Merkle-Damgard transform to turn fixed-length collision-resistant compression function into hash function that accepts arbitrary length inputs (same Merkle as Merkle trees!)
+\item SHA-3, released 2015.
+\end{itemize}
+
 \section*{SHA-256}
 \begin{itemize}
   \item Merkle-Damgard Transform: change arbitrary length to fixed length - compression function
@@ -119,9 +144,9 @@ Two additional properties
       \item F is the round function, and K0, K1, ... Kn are the keys for rounds 0, 1, ... n. 
       \item Split plaintext to 2 blocks L0 and R0
       \item For reach round i = 0, 1, ..., n, compute:
-        \subitem $L\textsubscript{i+1}\ =\ R\textsubscript{i}$
-        \subitem $R\textsubscript{i+1}\ =\ R\textsubscript{i+1} \oplus F(R\textsubscript{i}, K\textsubscript{i})$.
-      \item Ciphertext is $(R\textsubscript{n+1}, L\textsubscript{n+1})$
+        \subitem $L_{i+1}\ =\ R_{i}$
+        \subitem $R_{i+1}\ =\ R_{i+1} \oplus F(R_{i}, K_{i})$.
+      \item Ciphertext is $(R_{n+1}, L_{n+1})$
     \end{enumerate}
   \item After padding from above, split into smaller parts, XOR with each other, left bitshift.
     \begin{center}
