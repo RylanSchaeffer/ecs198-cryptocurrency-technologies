@@ -28,40 +28,68 @@ failed = []
 rootdir = os.getcwd()
 countr = 0
 countw = 0
+count = 0
 save_stdout = sys.stdout
 for subdir, dirs, files in os.walk(rootdir):
     for file in files:
-        full = subdir + '/' + file
+        full = subdir + '/' + file #create full path
         if file.endswith('py'):
-            countw = countw + 1
+            if full.find('grader') != -1 and full.find('Rylan'): #skip instructor files
+                continue
+            count = count + 1 #count for progress bar
             path = os.path.join(rootdir, file)
             person = full.find("Program 1/")
             person = person + 10
             eperson = full.find("/Submission")
             current = full[person:eperson]
             sys.stdout = save_stdout
-            printProgress(countw, 27, prefix = 'Grading...', suffix='Complete', barLength=50)
-            if file.endswith('Submission.py'):
+            printProgress(count, 23, prefix = 'Grading...', suffix='Complete', barLength=50)
+            sys.stdout = open(os.devnull,'w')
+
+            if file.endswith('Submission.py'): #Correct file formatting
                 name = file[:-3]
                 try:
                     submission = imp.load_source(name, full)
-                    sys.stdout = open(os.devnull,'w')
                     if rsa.verify(*submission.main()):
                         passed.append(current)
                         countr = countr + 1
                 except rsa.pkcs1.VerificationError as exc:
+                    countw = countw + 1
                     failed.append(current + " verification error: " + str(exc))
                 except AttributeError as exc:
+                    countw = countw + 1
                     failed.append(current + " attribute error: " + str(exc))
                 except ImportError as exc:
+                    countw = countw + 1
                     failed.append(current + "import error: " + str(exc))
                 except TypeError as exc:
+                    countw = countw + 1
                     failed.append(current + " type error: " + str(exc))
+                except:
+                    countw = countw + 1
+                    failed.append(current + " unexpected [other] error")
 
             else:
-                if full.find('grader') != -1 and full.find('Rylan'):
-                    continue
-                failed.append(current + " wrong file name: " + full[full.find("Program 1")+10:])
+                name = file[:-3]
+                try:
+                    submission = imp.load_source(name, full)
+                    if rsa.verify(*submission.main()):
+                        failed.append('FUNCTIONAL but wrong name: ' + current)
+                except rsa.pkcs1.VerificationError as exc:
+                    countw = countw + 1
+                    failed.append(current + " verification error: " + str(exc))
+                except AttributeError as exc:
+                    countw = countw + 1
+                    failed.append(current + " attribute error: " + str(exc))
+                except ImportError as exc:
+                    countw = countw + 1
+                    failed.append(current + "import error: " + str(exc))
+                except TypeError as exc:
+                    countw = countw + 1
+                    failed.append(current + " type error: " + str(exc))
+                except:
+                    countw = countw + 1
+                    failed.append(current + " unexpected [other] error")
 sys.stdout = save_stdout
 f.write("Total Passed: " + str(countr))
 f.write("\nTotal Failed: " + str(countw))
@@ -75,3 +103,4 @@ for name in failed:
         f.write(name + '\n')
 f.close()
 print "Process Completed"
+sys.exit(0)

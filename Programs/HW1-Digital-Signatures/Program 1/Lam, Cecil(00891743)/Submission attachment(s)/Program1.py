@@ -8,4 +8,4 @@ def main():
 	publicKey = pubkey
 	return msg, signature, publicKey;
 
-print(main())
+#print(main())

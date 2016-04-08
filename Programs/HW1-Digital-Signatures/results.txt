@@ -1,4 +1,5 @@
-Total Passed: 17Total Failed: 27
+Total Passed: 18
+Total Failed: 3
 Passed:
 Akanesuvan, Kantapon (Joe)(00982368)
 Alksninis, Raymund(00909744)
@@ -19,8 +20,8 @@ Yuen, Tiffany(01096628)
 Zharkov, Stephan(00947110)
 
 Failed:
-Khan, Ali(01073611)import error: No module named Crypto
-Lam, Cecil(00891743) wrong file name: Lam, Cecil(00891743)/Submission attachment(s)/Program1.py
-Tran, Kevin(00762492) wrong file name: Tran, Kevin(00762492)/Submission attachment(s)/program1.py
-Tu, Annie(00980054) type error: verify() argument after * must be a sequence, not NoneType
-Xiao, Chengeng(01091971) wrong file name: Xiao, Chengeng(01091971)/Submission attachment(s)/ECS198F_HW1.py
+Khan, Ali(01073611)import error: No module named Crypto - works in theory, but wrong package
+Lam, Cecil(00891743) verification error: Verification failed - wrong string checked
+FUNCTIONAL but wrong name: Tran, Kevin(00762492)
+Tu, Annie(00980054) type error: verify() argument after * must be a sequence, not NoneType - printed not returned
+FUNCTIONAL but wrong name: Xiao, Chengeng(01091971) 
