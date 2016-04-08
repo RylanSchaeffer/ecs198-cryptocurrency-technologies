@@ -1,0 +1,26 @@
+Total Passed: 17Total Failed: 27
+Passed:
+Akanesuvan, Kantapon (Joe)(00982368)
+Alksninis, Raymund(00909744)
+Belliss, Davey Jay(00978426)
+Beristain-Barajas, Raymundo(01028973)
+Bloem, Sebastian(00781527)
+Gao, Ziyue(01108272)
+Koradia, Soham(00952779)
+Kyawmyint, Matthew(00980671)
+Lindberg, Tobias(01132923)
+Ngo, Bryan(01105827)
+Nguyen, Harrison(00968523)
+Rotter-Sieren, Anton(00894581)
+Smith, Darin(00950178)
+Vargas Roque, Graciela(01005422)
+Xu, Ran(00874902)
+Yuen, Tiffany(01096628)
+Zharkov, Stephan(00947110)
+
+Failed:
+Khan, Ali(01073611)import error: No module named Crypto
+Lam, Cecil(00891743) wrong file name: Lam, Cecil(00891743)/Submission attachment(s)/Program1.py
+Tran, Kevin(00762492) wrong file name: Tran, Kevin(00762492)/Submission attachment(s)/program1.py
+Tu, Annie(00980054) type error: verify() argument after * must be a sequence, not NoneType
+Xiao, Chengeng(01091971) wrong file name: Xiao, Chengeng(01091971)/Submission attachment(s)/ECS198F_HW1.py
