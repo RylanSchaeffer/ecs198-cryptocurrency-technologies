@@ -22,18 +22,18 @@ def printProgress (iteration, total, prefix = '', suffix = '', decimals = 2, bar
     if iteration == total:
         print("\n")
 
-f = open('results.txt', 'w')
+f = open('results.txt', 'w') #write out results in results.txt
 passed = []
 failed = []
 rootdir = os.getcwd()
 countr = 0
 countw = 0
 count = 0
-save_stdout = sys.stdout
+save_stdout = sys.stdout #save output object so we can redirect students output to dev/null
 for subdir, dirs, files in os.walk(rootdir):
     for file in files:
         full = subdir + '/' + file #create full path
-        if file.endswith('py'):
+        if file.endswith('py'): #grab all python files in case they named incorrectly
             if full.find('grader') != -1 and full.find('Rylan'): #skip instructor files
                 continue
             count = count + 1 #count for progress bar
@@ -44,7 +44,7 @@ for subdir, dirs, files in os.walk(rootdir):
             current = full[person:eperson]
             sys.stdout = save_stdout
             printProgress(count, 23, prefix = 'Grading...', suffix='Complete', barLength=50)
-            sys.stdout = open(os.devnull,'w')
+            sys.stdout = open(os.devnull,'w') #send student output to devnull
 
             if file.endswith('Submission.py'): #Correct file formatting
                 name = file[:-3]
@@ -55,7 +55,7 @@ for subdir, dirs, files in os.walk(rootdir):
                         countr = countr + 1
                 except rsa.pkcs1.VerificationError as exc:
                     countw = countw + 1
-                    failed.append(current + " verification error: " + str(exc))
+                    failed.append(current + " verification error: " + str(exc)) #didn't verify correctly
                 except AttributeError as exc:
                     countw = countw + 1
                     failed.append(current + " attribute error: " + str(exc))
@@ -69,7 +69,7 @@ for subdir, dirs, files in os.walk(rootdir):
                     countw = countw + 1
                     failed.append(current + " unexpected [other] error")
 
-            else:
+            else: #grade for wrong naming 
                 name = file[:-3]
                 try:
                     submission = imp.load_source(name, full)
