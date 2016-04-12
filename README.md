@@ -9,15 +9,18 @@
 
   Submit a program that accepts a string of transactions, and outputs a hash tree of transactions.
 
-3. Centralized Cryptocurrency
-
-  Submit a program that accepts a list of transactions over a number of "epochs", and outputs a list of valid transactions per epoch
-
-4. Proof of Work
+3. Proof of Work
 
   Submit a program that accepts a list of transactions and an integer n, and outputs the value of a nonce such that
 
   ```hash(root of hash tree | nonce)``` has n leading zeroes
+
+
+To be updated...
+
+3. Centralized Cryptocurrency
+
+  Submit a program that accepts a list of transactions over a number of "epochs", and outputs a list of valid transactions per epoch
 
 5. Proof of Work (Cont.)
   
