@@ -29,7 +29,7 @@ def main(argv):
         hashes = [hashlib.sha256(leftHash.hexdigest() + rightHash.hexdigest()) for leftHash, rightHash in zip(hashes[0::2], hashes[1::2])]
 
     # return hexidecimal digest
-    return hashes[0].hexdigest()
+    print hashes[0].hexdigest()
 
 
 if __name__ == '__main__':
