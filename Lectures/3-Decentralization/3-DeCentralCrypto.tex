@@ -112,7 +112,7 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
   \item Problems:
     \subitem Latency, not all nodes connected, internet connection, malicious nodes
     \subitem Global time does not exist
-  \item Byzantine Generals
+  \item Byzantine Generals (solved by Mining)
   \item Paxos
     \subitem Makes compromises - never produces inconsistent result, but under rare conditions, protocol can get stuck
   \item How Bitcoin breaks traditional assumptions
@@ -163,6 +163,12 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
     \subitem Sybil nodes to subvert process
     \subitem Solution: proof of work
   \item Proof of work
+    \subitem Mining: Hash function with nonce appended to beginning (ex: 0's)
+    \subitem SHA-256 used twice
+    \subitem Less than some value
+    \subitem Items used: version, prevBlockHash, merkleRoot, timestamp, bits, nonce
+    \subitem http://www.righto.com/2014/09/mining-bitcoin-with-pencil-and-paper.html
+  \item Proof of work cont.
     \subitem Selecting nodes based on processing power/proportional
     \subitem Hopefully not monopolized
     \subitem proof of stake - proportion to ownership of currency (used in other cryptocurrencies)
