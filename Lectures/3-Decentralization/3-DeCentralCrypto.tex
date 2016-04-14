@@ -116,7 +116,7 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
       \item "Zero confirmation transaction" is a bad idea.
       \item The more confirmations, the better the choice. Bitcoin uses 6.
     \end{itemize}
-  \item Incentives:
+  \item Incentives: Solves 3
     \begin{itemize}
       \item Can't penalize, but can reward nodes for working correctly.
       \item Incentive 1: Block Reward (25 BTC, halves every 4 years). (Solves 3)
@@ -130,20 +130,17 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
   \item The Solution: Proof of work:
     \begin{itemize}
       \item Select nodes in proportion to computational power
-      \item Hash puzzles: to create a block, find a block such that $H(nonce || prevHash || tx...) < target$. 
+      \item \emph{Give example of leading 0's}
       \item Difficult to compute
+      \item Puzzle Friendliness: No solving strategy for finding $H(k | x)=y$ is better than trying random values of x.
+      \item Motivation to subvert the process (picking a hopefully honest node), so reward honest nodes
+      \item Use bitcoins to incentivize honest nodes - mining. Reward only if it becomes legitimate transaction
+      \item Every 210,000 blocks (4 years), block reward is cut in half. Geometric sum - 21 million bitcoins
       \item Nonce published as part of the block.
     \end{itemize}
-    \subitem Puzzle Friendliness: No solving strategy for finding $H(k | x)=y$ is better than
-    trying random values of x.
-    \subitem Motivation to subvert the process (picking a hopefully honest node), so reward honest nodes
-    \subitem HashCash - with SHA-256
-    \subitem Can't penalize those who try to double spend, since there's no way to tell
-    \subitem Use bitcoins to incentivize honest nodes - mining. Reward only if it becomes legitimate transaction
-    \subitem Every 210,000 blocks (4 years), block reward is cut in half. Geometric sum - 21 million bitcoins
   \item Proof of work details
     \subitem Mining: Hash function with nonce appended to beginning (ex: 0's)
-    \subitem SHA-256 used twice
+    \subitem HashCash - with SHA-256 (used twice)
     \subitem Less than some value
     \subitem Items used: version, prevBlockHash, merkleRoot, timestamp, bits, nonce
     \subitem Selecting nodes based on processing power/proportional
@@ -172,6 +169,7 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
       \item Double Spend - DRAW DIAGRAM\\ Say Alice pays Bob, and an honest node broadcasts this. Bob accepts that he's been paid. Alice then
         gets to broadcast her own transaction. She then makes a block with the \emph{prevBlock} hash as the one before her payment to Bob.
         Only one of these blocks will be accepted. 
+        \subitem Can't penalize those who try to double spend, since there's no way to tell
       \item Sybil attack
         \subitem Can't gain more power by having more accounts
         \subitem Satoshi's original paper had 1 cpu = 1 vote
@@ -184,7 +182,7 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
         \subitem 6 blocks; double spend probability goes down exponentially
         \subitem Never a 100\% guarantee
     \end{itemize}
-  \item Solves the problem of not trusting a central authority 
+  \item Solves the problem of not trusting a central authority - Problem 4
   \item 51\% attacker
     \begin{enumerate}
       \item CANNOT Steal Bitcoin
