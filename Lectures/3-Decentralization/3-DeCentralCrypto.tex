@@ -104,10 +104,6 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
     \subitem Paxos is a Two Phase Commit (2PC): Coordinator suggests value to all nodes, Coordinator (on receiving enough
           yes's), says value is final - Update. (Problem of falling coordinator is solve by everyone being able).\\
           Two phases are called \emph{Voting Phase} and \emph{Commit Phase}.
-  \item Problems: 
-    \subitem Byzantine Generals
-    \subitem Fischer-Lynch-Paterson: concensus impossible with a single faulty node.
-    \subitem Latency, not all nodes connected, internet connection, malicious nodes
   \item Consensus without identity - Block Chain
     \begin{itemize}
       \item Bitcoin nodes don't have identity; pseudonymity vs. anonymity
@@ -161,22 +157,32 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
       \item Mining is open to everyone
       \item Updates to software - core developers trusted by the community who have a lot of power (Solve Problem 4)
     \end{itemize}
-  \item Attacks and New Problems from being Decentralized:
+  \item New Problems from being Decentralized and Attacks:
     \begin{itemize}
+      \item Byzantine Generals: How to make a safe decision while communicating with other parties over an insecure network
+        \subitem Work is hard, but easy to check if it's been done.
+        \subitem Blockchain is important because it is a way of representing the truth, without any one gatekeeper.
+        \subitem Give example then consider: Must wait 10 minutes to give message, and must embed all past messages in your own. 
+        \subitem http://www.dugcampbell.com/byzantine-generals-problem/
+      \item Implicit Concensus:
+        \subitem Byzantine Generals
+        \subitem Chosen node chooses what the next block is; voting is by what is extended by the others
+      \item Fischer-Lynch-Paterson: concensus impossible with a single faulty node.\\
+        solved with 6 blocks 
+        \subitem Can't penalize those who try to double spend, since there's no way to tell
+      \item Blocks have a tendency to extend the block they hear about first
+      \item Orphan Block
+      \item Latency, not all nodes connected, internet connection, malicious nodes
+      \item Attacks:
       \item Stealing - even if Alice gets to decide the next block, she can't steal because she has to create
         a valid transaction; can't forge signatures
       \item Denial of Service - even if Alice never validates Bob's transactions, an honest node will eventually do so.
       \item Double Spend - DRAW DIAGRAM\\ Say Alice pays Bob, and an honest node broadcasts this. Bob accepts that he's been paid. Alice then
         gets to broadcast her own transaction. She then makes a block with the \emph{prevBlock} hash as the one before her payment to Bob.
         Only one of these blocks will be accepted. 
-        \subitem Can't penalize those who try to double spend, since there's no way to tell
       \item Sybil attack
         \subitem Can't gain more power by having more accounts
         \subitem Satoshi's original paper had 1 cpu = 1 vote
-      \item Implicit Concensus:
-        \subitem Chosen node chooses what the next block is; voting is by what is extended by the others
-      \item Blocks have a tendency to extend the block they hear about first
-      \item Orphan Block
       \item Zero-confirmation transaction
         \subitem Bob gives Alice product before transaction has been verified
         \subitem 6 blocks; double spend probability goes down exponentially
