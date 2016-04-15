@@ -7,6 +7,12 @@ import sys
 
 
 def main(argv):
+    '''
+    Input: A file name for a file that contains a set of transactions and a target
+    Output: A merkle root for the given transactions + nonce that solves the mining puzzle; the
+    merkle root should start with 'target' number of 0's
+
+    '''
 
     # open transaction file
     file = open(argv[0], 'r')
