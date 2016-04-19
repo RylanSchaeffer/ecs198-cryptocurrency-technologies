@@ -27,12 +27,13 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
     \subitem Report on some study/article about Bitcoin/Cryptocurrencies
     \subitem Other ideas
   \item Homework 3
-  \item Why decentralize?
-  \item Problems to solve/How proof of work solves them
-  \item Mining/Motivations/Why it's important (Proof of work)
-  \item Shortest vs. Longest blockchain
-  \item Double spending
-  \item 51\% attacker
+  \item Lecture Review/Clarification
+    \subitem Why decentralize?
+    \subitem Problems to solve/How proof of work solves them
+    \subitem Mining/Motivations/Why it's important (Proof of work)
+    \subitem Shortest vs. Longest blockchain
+    \subitem Double spending
+    \subitem 51\% attacker
 \end{itemize}
 
 \section*{Advantages to Centralization}
@@ -51,8 +52,6 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
 
 \section*{Decentralized Cryptocurrencies}
 \begin{itemize}
-  \item Decentralization is not all or nothing
-    \subitem Partially decentralized - SMTP (email)
   \item How does Bitcoin deal with Decentralization?
     \subitem Problems to address, since it's no longer centralized
     \begin{enumerate}
@@ -64,37 +63,21 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
 \end{itemize}
 
 \section*{Distributed Consensus (Solves 1 and 2)}
+\begin{center}
+  \includegraphics[width=10cm, height=6cm]{process.jpg}
+\end{center}
+\section*{Block}
+\begin{center}
+  \includegraphics[width=10cm, height=6cm]{merkle.png}
+\end{center}
+The public ledger (block chain) was started on Jan 3, 2009 presumably by Satoshi Nakamoto. The first
+block is called the Genesis Block. This is a special case in the source code.
+\section*{Proof of work:}
 \begin{itemize}
-  \item Paxos - Method for consensus
-  \item All good nodes agree on the same value (proposed by a good node)
-    \subitem A good node is one that is being honest
-  \item How it works:
-    \begin{itemize}
-      \item All nodes have a sequence of blocks of transactions they have reached consensus on; order is important
-      \item Each node has a set of outstanding transactions - this solves the problem where not all nodes are aware of all transactions.
-      \item Each transaction is broadcast to all
-      \item Doesn't matter if transactions are left out - they get included in the next block.
-      \item A random node gets to broadcast its block per round
-      \item Other nodes accept only if valid, and show through including block in hash for next block.
-      \item Paxos is a Two Phase Commit (2PC): Coordinator suggests value to all nodes, Coordinator (on receiving enough
-          yes's), says value is final - Update. (Problem of falling coordinator is solve by everyone being able).\\
-        \subitem Two phases are called \emph{Voting Phase} and \emph{Commit Phase}.
-    \end{itemize}
-  \item Consensus without identity - Block Chain
-    \begin{itemize}
-      \item Solution: Proof of Work (explanation next)
-      \item Bitcoin nodes don't have identity; pseudonymity vs. anonymity
-      \item Implicit Consensus: Random node picks next block in the chain, and other nodes vote by extending or ignoring.
-        \subitem Implicit because implied though not plainly expressed
-      \item The more confirmations, the better the choice. Bitcoin uses 6.
-    \end{itemize}
-\end{itemize}
-\section*{The Solution: Proof of work:}
-\begin{itemize}
+  \item Puzzle Friendliness: No solving strategy for finding $H(k | x)=y$ is better than trying random values of x.
   \item Select nodes in proportion to computational power
   \item \emph{Give example of leading 0's}
   \item Difficult to compute
-  \item Puzzle Friendliness: No solving strategy for finding $H(k | x)=y$ is better than trying random values of x.
   \item Motivation to subvert the process (picking a hopefully honest node), so reward honest nodes
   \item Use bitcoins to incentivize honest nodes - mining. Reward only if it becomes legitimate transaction
   \item Every 210,000 blocks (4 years), block reward is cut in half. Geometric sum - 21 million bitcoins
@@ -115,9 +98,28 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
       \item proof of stake - proportion to ownership of currency (used in other cryptocurrencies)
       \item http://www.righto.com/2014/09/mining-bitcoin-with-pencil-and-paper.html
     \end{itemize}
-  \item Incentives: Solves 3
+  \item Difficulty: what network hash rate results in a given difficulty?
+    \subitem Currently, the entire network of miners makes about 30 trillion attempts a second.
+    \subitem Difficulty is adjusted every 2016 blocks based on the time it took to find them.
+    \subitem At the desired rate of one block every 10 minutes, 2016 blocks should take  exactly 2 weeks
+    to find.
+    \subitem If the previous 2016 blocks took more than two weeks to find, the difficulty is reduced. 
+    \subitem If the previous 2016 blocks took less than two weeks to find, difficulty is increased.
+    \subitem Hash is a random number between 0 and 2\textsuperscript{256-1}.
+    \subitem Since a lower target makes Bitcoin block generation more difficult, the maximum target is the lowest possible difficulty.
+    \subitem Bitcoin Mining Pools
+\end{itemize}
+\section*{Double Spending}
+\begin{center}
+  \includegraphics[width=10cm, height=6cm]{orphan.png}
+\end{center}
+Say Alice pays Bob, and an honest node broadcasts this. Bob accepts that he's been paid. Alice then
+gets to broadcast her own transaction. She then makes a block with the \emph{prevBlock} hash as the one before her payment to Bob.
+one of these blocks will be accepted. 
+\section*{Incentives: Solves 3}
+\begin{itemize}
+  \item Can't penalize, but can reward nodes for working correctly.
     \begin{itemize}
-      \item Can't penalize, but can reward nodes for working correctly.
       \item \emph{Incentive 1}: Block Reward (25 BTC, halves every 4 years). (Solves 3)
         \subitem 21 million max - block reward is how new coins are created; run out in 2140.
       \item \emph{Incentive 2}: Transaction Fee
@@ -137,9 +139,6 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
     \end{itemize}
   \item New Problems from being Decentralized and Attacks:
     \begin{itemize}
-      \item Fischer-Lynch-Paterson: concensus impossible with a single faulty node.\\
-        solved with 6 blocks 
-        \subitem Can't penalize those who try to double spend, since there's no way to tell
       \item Blocks have a tendency to extend the block they hear about first
       \item Orphan Block
       \item Latency, not all nodes connected, internet connection, malicious nodes
@@ -147,9 +146,6 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
       \item Stealing - even if Alice gets to decide the next block, she can't steal because she has to create
         a valid transaction; can't forge signatures
       \item Denial of Service - even if Alice never validates Bob's transactions, an honest node will eventually do so.
-      \item Double Spend - DRAW DIAGRAM\\ Say Alice pays Bob, and an honest node broadcasts this. Bob accepts that he's been paid. Alice then
-        gets to broadcast her own transaction. She then makes a block with the \emph{prevBlock} hash as the one before her payment to Bob.
-        Only one of these blocks will be accepted. 
       \item Sybil attack
         \subitem Can't gain more power by having more accounts
         \subitem Satoshi's original paper had 1 cpu = 1 vote
@@ -161,8 +157,9 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
   \item Solves the problem of not trusting a central authority - Problem 4
   \item 51\% attacker
     \begin{enumerate}
-      \item CANNOT Steal Bitcoin
       \item CANNOT change block reward
+      \item CANNOT spend other people's Bitcoin
+      \item CANNOT change number of coins generated per block
       \item Suppress transactions
       \item Destroy confidence in Bitcoin
     \end{enumerate}
