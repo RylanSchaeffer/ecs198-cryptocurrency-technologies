@@ -19,15 +19,20 @@
 
 Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryptocurrency Technologies Spring 2015 course.
 
-\section*{Centralization vs. Decentralization}
-\section*{Centralized Banking}
+\section*{Agenda}
 \begin{itemize}
-  \item Centralize: to concentrate under a single authority
-  \item Centralized banking means there is a single institution that manages supply, inflation, and interest.
-  \item Cryptocurrency has to satisfy:
-    \subitem Mathematically complex (to avoid fraud and hacker attacks)
-    \subitem Preserve user anonymity without being a conduit for tax evasion, money laundering, etc.
-    \subitem Decentralized but with \emph{adequate consumer safeguards and protection} - reason will be introduced
+  \item Final Project
+    \subitem Rudimentary cryptocurrency
+    \subitem Groups vs. Pairs vs. Single
+    \subitem Report on some study/article about Bitcoin/Cryptocurrencies
+    \subitem Other ideas
+  \item Homework 3
+  \item Why decentralize?
+  \item Problems to solve/How proof of work solves them
+  \item Mining/Motivations/Why it's important (Proof of work)
+  \item Shortest vs. Longest blockchain
+  \item Double spending
+  \item 51\% attacker
 \end{itemize}
 
 \section*{Advantages to Centralization}
@@ -43,41 +48,6 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
 \end{itemize}
 
 \section*{CentralizedCoin}
-\begin{itemize}
-  \item I can generate coins, and give them unique ID's. I also sign these coins.
-  \item I can pass them to anyone else - I sign the transaction; recipient can prove it's valid because it has my signature.
-  \item Recipient can sign to pass to someone else. 
-  \item Chain of hash pointers can be used to follow it back. = verify
-  \item Double Spending Problem
-  \item Only I can write on the chain - everything has to pass through me
-  \item This is centralized; how do you trust me? 
-\end{itemize}
-
-\section*{Centralized Cryptocurrencies}
-\begin{itemize}
-  \item E-Gold (1996)
-    \begin{itemize}
-      \item Operated by Gold and Silver Reserve inc 
-      \item Let users open an account denominated in gold; could make instant transfers
-      \item Grew to 5 million accounts; processing over 2 billion a year
-      \item ``e-Gold Special Purpose Trust'' - actually held the gold; could see gold bars with serial numbers per acct.
-      \item Hackers used flaws in Microsoft Windows OS's and phishing to compromise millions of e-gold accounts
-      \item People thought it was \emph{anonymous}, but really it was \emph{pseudonymous}. Law enforcement identified many.
-      \item Ponzi schemes via. eBay 
-      \item Patriot Act, after Sept 11, made operating a money transmitter business without a state money transmitter license a federal crime.
-      \item Taken down 2007-2013; inability to provide reliable user identification and cut off illegal activity
-      \item PayPal has done a better job, but still has to deal with the same problems.
-      \item KYC - process of verifying clients' identity
-    \end{itemize}
-  \item DigiCash by Chaum 1990
-    \begin{itemize}
-      \item Store money as data on your computer
-      \item Transfer anonymously
-      \item Lacked decentralization; the company's servers were used
-      \item Went bankrupt in 1998
-    \end{itemize}
-  \item Can be shut down by gov. at any time
-\end{itemize}
 
 \section*{Decentralized Cryptocurrencies}
 \begin{itemize}
@@ -116,15 +86,6 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
       \item Bitcoin nodes don't have identity; pseudonymity vs. anonymity
       \item Implicit Consensus: Random node picks next block in the chain, and other nodes vote by extending or ignoring.
         \subitem Implicit because implied though not plainly expressed
-      \item Byzantine Generals: How to make a safe decision while communicating with other parties over an insecure network
-        \subitem Example: 500 - split into 5 groups. 300 defending. 1 group corrupt.
-        \subitem Give example then consider: Must wait 10 minutes to give message, and must embed all past messages in your own. 
-        \subitem Work is hard, but easy to check if it's been done.
-        \subitem Blockchain is important because it is a way of representing the truth, without any one gatekeeper.
-        \subitem Chosen node chooses what the next block is; voting is by what is extended by the others
-        Source: \url{http://www.dugcampbell.com/byzantine-generals-problem/}
-      \item Works because difficult (impossible) to subvert.
-      \item ``Zero confirmation transaction'' is a bad idea.
       \item The more confirmations, the better the choice. Bitcoin uses 6.
     \end{itemize}
 \end{itemize}
