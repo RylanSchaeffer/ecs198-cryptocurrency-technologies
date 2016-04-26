@@ -58,11 +58,6 @@ Protocol dictates that, on average, mining a new block should take about 10 minu
 \item Technology quickly becomes antiquated
 \item Cheaper in cold locations with cheap electricity
 \item Shifted to professional companies
-\end{itemize}
-
-\section{Succeeding as a Miner}
-Suppose you spent \$6,000 on mining rig. Assuming you expect to find one block per 14 months, worth 25 bitcoins.
-\begin{itemize}
 \item Model as Poisson process
 \item Reduced variance when mining together
 \end{itemize}
@@ -72,69 +67,102 @@ Suppose you spent \$6,000 on mining rig. Assuming you expect to find one block p
 \item Track each person's computational contribution, using "near misses" as a proxy measurement
 \item Model 1: Pay per share. Pool manager pays flat fee per near miss above a set difficulty. No incentive to send valid blocks. High risk for pool manager.
 \item Model 2: Pay proportionally. Low risk for pool manager.
-\item (Display mining consolidation visually)
+\item Model 3: Pay someone to run ASIC cluster. Receive share of reward when new block is mined
 \end{itemize}
 
-\section{Pros and Cons of Mining}
+\section{Pros and Cons of Proof-of-Work}
 \begin{itemize}
-\item Allow individuals and groups to make money, where otherwise impossible
-\item Threatens stability of Bitcoin, since mining pools are a form of centralization
+\item Pros: Allow individuals and groups to make money, where otherwise impossible
+\item Cons: Few possible attacks; leads to centralization; wasteful!
 \end{itemize}
 
-\section{Incentives and Strategies}
+\section{Attacks on Proof-Of-Work}
 \begin{itemize}
-\item Much game theory, including
-\subitem which transactions to include
-\subitem which block to mine on
-\subitem choosing between blocks of the same height
-\subitem when to announce new blocks
-\item Forking attack: Double spending possible if thief controls >51\% of the network. Spends money, seller accepts because chain is long enough, then thief extends alternative chain, effectively erasing the previous transaction. May not require 51\%
+\item Forking attack: Double spending possible if thief controls $>$51\% of the network. Spends money, seller accepts because chain is long enough, then thief extends alternative chain, effectively erasing the previous transaction. May not require 51\%
 \item Block-withholding attack: Solve a block, wait til someone else solves a block, then release yours to prevent their from being accepted. Increases your effective share of rewards.
 \item Blacklisting: Can refuse to process transactions from certain public keys
 \end{itemize}
 
-
-
-\section{Alternatives to Mining Puzzles}
+\section{Disincentivizing Pool Formation}
 \begin{itemize}
-\item Solving puzzles takes tremendous energy which is basically wasted
+\item Note that pool formation requires two components:
+\subitem Easy for miner to prove amount of work they are doing
+\subitem Easy for miner to prove that they're following rules
+\item Possible Solution: Change puzzles from Hash(transactions) to Hash(signature of transactions), where the secret key used to sign is the secret key corresponding to the recipient of the newly mined block
+\subitem Pool operators either give out private key for pool members to use
+\subitem or compute signatures themselves (10x more computationally expensive than hashing)
+\item Does nothing to counter ASICs
+\end{itemize}
+
+\section{Countering ASICs}
+\begin{itemize}
 \item Alternative puzzle requirements:
 \subitem Easy to verify solutions
 \subitem Adjustable difficulty to control rate of mining
 \subitem ``Program freeness": chances of winning should be proportional to computational power. Also known as memoryless process.
-\item ASIC Resistant Puzzles
-\subitem Goal: Decentivize consolidation by making individual computers competitive with ASICs.
-\subitem Method: memory-hard puzzles i.e. puzzles that require large amount of memory to solve or memory-bound puzzles i.e. puzzles that are slowed down by memory access time.
-\subitem Example: Scrypt. Used in Lytecoin. Two steps. 
-\subsubitem 1) fill large buffer of RAM with pseudorandom data i.e. for i = 1 to N: V[i] = SHA-256(V[i-1])
-\subsubitem 2) read and update the memory in pseudorandom order i.e. X = SHA-256(V[N-1]). for i = 1 to N, {j = X \% N; X = SHA-256(X \string^ V[j])}
-\subsubitem Memory-hard because if V isn't stored in memory, recomputing X = SHA-256(X \string^ V[j]) takes $O(n^2)$ instead of $O(n)$ as $j$ is generated pseudorandomly.
-\subsubitem Unfortunately, requires as much money to verify as does to compute
-\subsubitem Eventually Litecoin revealed that Scrypt ASICs were better than ordinary hashing ASICs
-\subitem Example: Cuckoo Cycle. Based on difficulty of finding cycles in a graph generated from a cuckoo hash table.
-\item Moving Target Puzzles: change puzzles occasionally so that ASICs are worthless
+\item Trust-based networks e.g. Ripple
+\item Memory-Hard Puzzles
+\item Moving Target i.e. change puzzle to prevent pooling
+\item Virtual Mining i.e. Proof-Of-Stake
+\end{itemize}
+
+\section{Trust-Based Networks}
+
+\section{Memory-Hard Puzzles}
+\begin{itemize}
+\item Goal: Decentivize consolidation by making individual computers competitive with ASICs.
+\item Method: memory-hard puzzles i.e. puzzles that require large amount of memory to solve or memory-bound puzzles i.e. puzzles that are slowed down by memory access time.
+\item Also known as space-hard puzzles
+\item Example: Scrypt. Used in Lytecoin. Two steps. 
+\subitem 1) fill large buffer of RAM with pseudorandom data i.e. for i = 1 to N: V[i] = SHA-256(V[i-1])
+\subitem 2) read and update the memory in pseudorandom order i.e. X = SHA-256(V[N-1]). for i = 1 to N, {j = X \% N; X = SHA-256(X \string^ V[j])}
+\subitem Memory-hard because if V isn't stored in memory, recomputing X = SHA-256(X \string^ V[j]) takes $O(n^2)$ instead of $O(n)$ as $j$ is generated pseudorandomly.
+\subitem Unfortunately, requires as much money to verify as does to compute
+\subitem Eventually Litecoin revealed that Scrypt ASICs were better than ordinary hashing ASICs
+\item Example: Balloon Hashing. New family of space hard password hashing functions recently invented at Stanford by Boneh and Corrigan-Gibbs
+\item Example: Cuckoo Cycle. Based on difficulty of finding cycles in a graph generated from a cuckoo hash table.
+\end{itemize}
+
+\section{Moving Target Puzzles}
+\begin{itemize}
+\item Strategy: change puzzles occasionally so that ASICs are less cost-competitive
+\end{itemize}
+
+\section{Virtual Mining}
+\begin{itemize}
+\item Want alternative basis for "voting power" in distributed consensus protocol
+\item Proof-of-Work also requires consuming real world goods (energy, equipment) to create virtual dollars.
+\item Idea: allocate mining power to currency holders in proportion to how much currency they hold
+\subitem: Advantages: removes centralization because ASICs have less of an advantage, currency holders have stake in future health of ecosystem
+\subitem: Disadvantages: Richest participants given easiest mining puzzle; vulnerable to burst attacks (i.e. store up stake)
+\item Example: Peercoin
+\subitem Uses combination of Proof-of-Work and Proof-Of-Stake
+\subitem To mine, solve SHA-256, but difficulty based on age of coin that is "consumed" by validating that block
+\item Nothing-at-Stake Problem (i.e. Stake-Grinding): attacker A, with less than 50\% of stake, tries to create fork of k blocks
+\subitem If fork succeeds, success. If fork fails, no cost
+\item Someone who controls $>$51\% of currency can exclude others and mine only their own blocks
 \end{itemize}
 
 \section{Proof-of-Useful-Work}
-Idea: Use computing energy for some benefit to society instead of wasting it. Examples include:
 \begin{itemize}
-\item Distributed computing projects e.g. SETI at Home, Folding at Home (protein structure folding)
+\item Idea: Use computing energy for some benefit to society instead of wasting it. Examples include:
+\item Example: Distributed computing projects e.g. SETI at Home, Folding at Home (protein structure folding)
 \subitem Problem: solution space was not equiprobable
-\item Great Internet Mersenne Prime Search
+\item Example: Great Internet Mersenne Prime Search
 \subitem Problem: solutions too rare
+\item Primecoin uses proof-of-useful work, by requiring miners to find Cunningham chains of prime numbers. Questionable how useful this is.
 \end{itemize}
 
-Primecoin uses proof-of-useful work, by requiring miners to find Cunningham chains of prime numbers. Questionable how useful this is.
 
 \section{Proof-of-Storage}
-Idea: use miners' storage power to help with some archival project/distributed computing problem
-
-Used in Permacoin as follows:
-
 \begin{itemize}
-\item Let $F$ be a large file that we want stored e.g. Large Hadron Collider backup data of several hundred petabytes
-\item 
+\item Also called Proof-of-Retrievability
+\item Idea: use miners' storage power to help with some archival project/distributed computing problem
+\item Used in Permacoin as follows:
+\subitem Let $F$ be a large file that we want stored e.g. Large Hadron Collider backup data of several hundred petabytes
+\subitem Construct Merkle Tree of $F$
+\subitem Each miner given random subset of F called $F_M \subset F$
 \end{itemize}
 
-chapter 8. to be finished...
+
 \end{document}
