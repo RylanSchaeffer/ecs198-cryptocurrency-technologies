@@ -1,0 +1,124 @@
+\title{\bf Lecture 6 - Flaws\\}
+\author{\bf Rylan Schaeffer and Vincent Yang\\}
+\date{\bf \today \\}
+
+\documentclass{article}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{graphicx}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-0.5in}
+
+\begin{document}
+\maketitle
+
+Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryptocurrency Technologies Spring 2015 course.
+
+
+
+\section*{Community Failure}
+\begin{itemize}
+  \item System completely controlled by just a handful of people.
+  \item Investing
+    \subitem People prefer to sit on the money and not spend
+  \item Block cap - set by Satoshi to be far above what would be hit; prevents network DOS.
+    \subitem Need hard fork to make changes, which should have been possible.
+    \subitem Hard fork is a change that has all users upgrade, without the possibility of reverting.
+\end{itemize}
+
+\section*{Full Block Chain}
+\begin{itemize}
+  \item Artificial cap of 1 mb per block has shifted network capacity to near full
+  \item In July, someone did a stress test and flooded the network with transactions. At that level, about 700 kb of transactions
+    were able to go through per second, or about 3 payments per second.
+    \subitem In theory, it can hit 1000kb but sometimes miners produce small blocks, even empty blocks, despite the existance of transactions
+    that are waiting to be confirmed.
+    \subitem The large number of txs waiting to confirm seems to largely be caused by the Chinese "Great Firewall" system.
+    \subitem 2mb is twice as big, would mess up their advantage
+  \item The average is currently at the cap - 700kb. 
+  \item There are frequent times when Bitcoin can't keep up with the transaction load, even when all blocks are max size.
+  \item Networks are incredibly unreliable when they run out of capacity. (e.g. DDOS)
+  \item Paxos problem - fully possible for a transaction to never be verified. It is impossible to depend on the network because
+    you don't know if the payment will go through since congestion is so bad that even minor spikes drastically change network conditions.
+    \subitem The average time is 49 minutes, but it is easily possible for it to reach upwards of 14 hours. 
+  \item Why not just raise the capacity? 
+    \begin{itemize}
+      \item Block chain is controlled by two Chinese miners (over 50\% of hash power)
+      \item Miners refuse to switch to a competing product because of loyalty, and causing panic.
+      \item They (Bitcoin Core developers) won't let it grow because they don't want news to cause panic. 
+      \item Chinese Firewall
+        \subitem Moving data across the border is so broken by the firewall that it barely works at all.
+        \subitem Currently, they can just barely maintain connection and claim the reward. If it gets more popular, taking part might
+        be too difficult and they'd lose income.
+    \end{itemize}
+  \item Due to severe mismanagement, "Bitcoin Core" project wasn't going to release a version with a higher block size limit.
+    \subitem Users could cast a vote by using BitcoinXT. If 75\% was reached, the bigger blocks would be allowed.
+  \item BitcoinXT
+    \begin{itemize}
+      \item Somehow pushed emotional buttons - one was the admin of the bitcoin.org website and top discussion forums
+      \item In the past, he allowed discussion of criminal activity in the name of 'freedom of speech'. However, he claimed
+        XT did not represent ``developer concensus'', and was not really bitcoin.
+      \item Voting was an abomination, because ``One of the great things about Bitcoin is its lack of democracy''.
+      \item He worked to kill XT, starting with censoring Bitcoin's primary communication channels - anything that had ``Bitcoin XT''
+        was erased, and XT couldn't be linked to or mentioned anywhere on the official site. Anyone trying to do as such was banned.
+      \item For the first time, investors couldn't get a clear picture of what was happening. Most people have no idea that the system is
+        about to reach capacity.
+    \end{itemize}
+  \item Why is Bitcoin Core keeping the limit?
+    \begin{itemize}
+      \item Satoshi left program to Gavin Andresen, an early contributor. Gavin was just pushed with the responsibility - he didn't want it. He brought on 
+        four other developers.
+        \subitem Side note - he lost commit access on May 2nd.
+      \item One such developer was Gregory Maxwell, who claimed he had mathematically proven Bitcoin to be impossible. 
+      \item In the beginning, when asked about questions of overwhelming amounts of data, Satoshi said it never really hits scale ceiling as machines improve.
+        \subitem Maxwell disagreed - he stated that as volume increases, only companies would be running Bitcoin because of cost.
+        \subitem ``You'd need a lot of bandwidth, on the order of a gigabit connection. It would work. THe problem is that it wouldn't be very decentralized, because
+        who would run a node?''
+      \item People preferred to kick the can down the road and avoid arguments - no firing policy. Maxwell founded a company that hired other developers
+      \item Gavin started writing to counter arguments of not raising the limit.
+      \item Developer responsible for releases refused to get involved.
+    \end{itemize}
+  \item Civil War
+    \subitem Coinbase - the largest/most popular Bitcoin startup in the USA has been erased from the official Bitcoin website for
+    'picking the wrong side', and banned from forums.
+  \item XT's struggles
+    \begin{itemize}
+      \item 15\% of nodes were running XT, and one mining pool offered. DDOS attacks started to the extent that
+        they even disconnected large regions of the internet. The mining pool was attacked and threatened to stop.
+      \item Scaling Bitcoin conferences - hosted by Core
+        \subitem First conference banned discussion of concrete proposals.
+        \subitem Extremely effective - people didn't upgrade because they thought they could just wait for Core to raise the limit (supposed to
+        happen in December).
+        \subitem tl;dr it stalled a block size decision while transaction free priceand block space pressures increase.
+    \end{itemize}
+  \item The solution... but not really
+    \begin{itemize}
+      \item 60\% capacity increase through accounting trick - not counting some bytes in each transaction.
+        \subitem Huge coordinated effort needed for implementation, rather than upping the limit.
+        \subitem Temporary solution
+      \item March 16, 2016: Fees to control congestion: fee might change when you hit front of queue - let people mark payments as
+        changable until they appear in blockchain. However, this lets people point back to themselves, thus reversing it.
+        \subitem Currently, 0.0001 BTC fee unless otherwise specified. Dynamic fees may let the sender change the fee based on network congestion.
+        \subitem Makes bitcoin useless for buying
+    \end{itemize}
+  \item If the team were swapped out, there are far too few people controlling too much (under 10 people).
+  Source: \url{https://github.com/bitcoin-dot-org/bitcoin.org/pull/1178}
+
+\section*{Storing bitcoin wallets on internet-connected devices}
+\begin{itemize}
+  \item Criminals used a botnet called Pony to infect a large number of computers Sept 2013-Jan 2014, stealing around 220,000 worth of bitcoins.
+  \item It stole bitcoin wallets stored locally on infected machines. 
+
+\end{itemize}
+\section*{51\%}
+\begin{itemize}
+  \item GHash.io and Eligius combined have over 51\% computing power.
+  \item Most of the problems are less about the protocol and more about people and services handing/storing bitcoin.
+\end{itemize}
+\end{itemize}
+\end{document}
