@@ -1,0 +1,128 @@
+\title{\bf Lecture 7 - Anonymity, Pseudonymity, Unlinkability\\}
+\author{\bf Rylan Schaeffer and Vincent Yang\\}
+\date{\bf \today \\}
+
+\documentclass{article}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-0.5in}
+
+\begin{document}
+\maketitle
+
+Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryptocurrency Technologies Spring 2015 course.
+
+\section{Motivation}
+\begin{itemize}
+\item Since blockchain is public, we want privacy for users
+\end{itemize}
+
+
+
+\section{Definitions}
+\begin{itemize}
+\item Pseudonymity: real name not required, but some moniker is e.g. Reddit
+\item Unlinkability: a user's multiple interactions with a system cannot be tied or associated together
+\item Anonymity: no moniker required e.g. 4Chan
+\subitem Anonymity = Pseudonymity + Unlinkability
+\end{itemize}
+
+\section{Pseudonymity}
+\begin{itemize}
+\item Bitcoin (and currencies previously described) were pseuodnymous, as public keys were used
+\item if public key is compromised once, an adversary can link all transactions made with that key to you
+\subitem Relatively easy to do. An exchange will track who you are, since they need \$. Someone you order something from will ship to your real life address.
+\item Sidechannels (indirect leaks of information) can reveal your identity
+\subitem Timing attacks, network usage attacks
+\item once public key linked to you, all past, present, future transactions will be traceable
+\end{itemize}
+
+\section{Unlinkability}
+\begin{itemize}
+\item Goals:
+\subitem Linking a user's multiple addresses together should be difficult
+\subitem Linking multiple transactions by a user should be difficult
+\subitem Linking a sender of a payment to the recipient should be difficult (not for single transaction, but chain of transactions)
+\item Achieving the last is hard, as usually your transaction is for a certain amount and the amount (relatively) uniquely identifies the transaction
+\subitem Instead, seek to maximize anonymity set of your transactions (the set of transactions that an adversary cannot distinguish from yours)
+\end{itemize}
+
+\section{Transaction Graph Analysis}
+\begin{itemize}
+\item Shared spending is evidence of joint control
+\item Can transitively link cluster of transactions as belonging to one entity
+\item Wallets usually have similar implementations, that can be exploited
+\subitem When a "change address" for a transaction is needed, the wallet generates a new address. This means that if a transaction's output has a never-before-seen-address, adversary can infer which output is to who
+\subitem Error prone, as users can override default behavior
+\item Can also identify users by "tagging" - interacting with them including pools, exchanges, wallet services, gambling sites
+\item Other techniques:
+\subitem directly transact with user
+\subitem asking service provider e.g. exchange
+\subitem carelessness (users will post bitcoin addresses on forums with other information related to their identity)
+\item Fistful of Bitcoins - transaction graph
+\end{itemize}
+
+\section{Network-layer Deanonymization}
+\begin{itemize}
+\item Block-chain is application layer, peer-to-peer network is network layer
+\item If multiple nodes on network collude, when a user broadcasts a transaction, the nodes can pinpoint the origin of that transaction, pin down the IP address
+\end{itemize}
+
+\section{Chaum's Blind Signatures}
+
+\section{Mixing}
+\begin{enumerate}
+\item Everyone sends transaction to service, service scrambles inputs, forwards to outputs
+\item Similar to banking, in that service can keep track of inputs and outputs
+\item can use series of mixers. If one is honest, hides your identity. Greater degree of security.
+\item standardize transaction amount to better hide
+\item Fees need to be all-or-nothing. Mixes expect to get paid. If they take a fraction out of a transaction, it identifies who participated. Also, cannot be sent to another mix, as the output is now smaller than the initial input. Alternative solution is probabilistic all-or-none consumption. But then need to convince users of correct functioning
+\end{enumerate}
+
+\section{Decentralized Mixing}
+\begin{itemize}
+\item Would like decentralized mixer. Philosophically aligned with cryptocurrencies, doesn't have bootstrapping issue, better anonymity, don't have to pay mixing fee.
+\item Coinjoin: Find peers who want to mix. Eschange input/output addresses. Construct transaction. Collect signatures. Broadcast transaction. 
+\subitem Vulnerable to denial of service attack. Anyone participating knows input-output pairs.
+\end{itemize}
+
+\section{Zerocoin and Zerocash}
+\begin{itemize}
+\item Zerocoin: Convert bitcoin to zerocoin, then back again. Burning original bitcoin breaks link between input and output. Each zerocoin is token that you sacrificed a bitcoin. Need proof that 1 bitcoin was sacrificed per 1 zero coin.
+\subitem Minting a zerocoin: Generate serial number S and random number r. Compute H(S, r). Publish commitment to block chain.
+\subitem Using a zerocoin: Lots of many "minted" coins in block chain. Claim "I know r" such that H(S, r) is in hash set $h_1, h_2, ..h_n$. Miners use ZKP to verify your ability to open commitment without actually opening it. Miners check that S has never previously been used. Now have new basecoin. When spent, serial number S becomes public.
+\item Zerocash: Builds on zerocoin. All transactions can be done in ZKP manner. Ledge publicly records existence of transactions, along with proofs to allow miners to verify correctly functioning of system. Neither addresses nor values are revealed.
+\subitem Requires "public parameters" (gigabyte long public keys). If compromised, adversary can create new zerocoins without being caught.
+\subitem Zerocash uses zk-SNARK (zero-knowledge Succinct Non-Interactive Arguments of Knowledge)
+\end{itemize}
+
+\section{Zero Knowledge Proofs}
+\begin{itemize}
+\item Zero-Knowledge Proofs: Provide evidence that you know something specific, without revealing that specific thing.
+\item First proposed in 1980s by Goldwasser, Micali and Rackoff. Ordinarily, Prover and Verifier. Switched to "What if Verifier is malicious?" How much information will leak? Goal: prove 'This statement is true' and nothing else
+\item Everything Provable is Provable in Zero-Knowledge. Paper by Goldwasser, Goldreich, Micali, a few others, master student Phillip Rogaway. All of NP admits zero-knowledge proofs.
+\item 3 Properties
+\subitem Completeness: if statement is true, honest verifier will be convinced by honest prover
+\subitem Soundness: if the statement is false, no dishonest prover can convince honest verifier except with some small probability
+\subitem Zero-Knowledge: if the statement is true, no cheating verifier learns anything other than this fact.
+\item Graph 3-coloring. Verifier draws graph. Prover provides solution by coloring graph. Covers each node with a hat. Verifier can randomly query. Repeat as many times as necessary, changing the coloring each time. As long as solution exists, Prover will always be able to answer Verifier query.
+\subitem Instead of hats, use commitments. 
+\item Zerocoin relies on Strong RSA assumption and double-discrete logarithm proofs
+\item Pinocchio Coin at Microsoft Research uses elliptic curves and bilinear pairings
+\end{itemize}
+
+\section{Zerocoin ZKP}
+\begin{itemize}
+\item Previously-logged commitments $C_0, C_1, ..., C_{n-1}$
+\item Owner of coin generates (S, r), uses to compute $C_n$ and adds to commitments. Prove knowledge of a $C_i \in C_0, C_1, ..., C_n$ and that $C_i = g^s h^r$.
+\item http://zerocoin.org/media/pdf/ZerocoinOakland.pdf
+\item $http://www.wisdom.weizmann.ac.il/~naor/PAPERS/SUDOKU_DEMO/$
+\end{itemize}
+
+\end{document}
