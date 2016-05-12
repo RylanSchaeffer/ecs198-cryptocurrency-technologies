@@ -35,7 +35,7 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
 
 \section{Pseudonymity}
 \begin{itemize}
-\item Bitcoin (and currencies previously described) were pseuodnymous, as public keys were used
+\item Bitcoin (and currencies previously described) are pseuodnymous, as public keys are used
 \item if public key is compromised once, an adversary can link all transactions made with that key to you
 \subitem Relatively easy to do. An exchange will track who you are, since they need \$. Someone you order something from will ship to your real life address.
 \item Sidechannels (indirect leaks of information) can reveal your identity
@@ -72,9 +72,21 @@ Note: This lecture is based on Princeton University's BTC-Tech: Bitcoin and Cryp
 \begin{itemize}
 \item Block-chain is application layer, peer-to-peer network is network layer
 \item If multiple nodes on network collude, when a user broadcasts a transaction, the nodes can pinpoint the origin of that transaction, pin down the IP address
+\item ``the first node to inform you of a transaction is probably the source of it." - Dan Kaminsky, 2011 Black Hat talk
+\item can counter using Tor, but Tor+Bitcoin interaction might have vulnerabilities generated through unintended interactions, Tor is intended for low-latency communication (e.g. web browsing), not high-latency blockchain confirmations
 \end{itemize}
 
 \section{Chaum's Blind Signatures}
+\begin{itemize}
+\item David Chaum's Blind Signatures, 1983. Digital Signatures. Idea: Bank issues notes with serial numbers. Sellers check with bank to confirm that notes are not being double spent before confirming transactions.
+\item Chaum's contribution: when new note issued, recipient chooses serial number. Keeps number hidden from bank, and bank signs (``blind signature")
+\item RSA blind signature:
+\subitem $r \leftarrow{\$} \{0,1\}^k$ such that gcd(N,r)=1 i.e. r is relatively prime to N
+\subitem User creates $m' \leftarrow mr^e (mod N)$. Note that m' leaks no information about m as r is a random value and thus $r^e (mod N)$ is a random value
+\subitem Authority signs $s' \leftarrow (m')^d (mod N)$
+\subitem Author compute signature of original message $s \leftarrow s' r^{-1} (mod N)$, where $r^{-1}$ is modular inverse of r
+\subitem This works because $s = s' r^{-1} = (m')^d r^{-1} = m^d r^{ed} r^{-1} = m^d r r^{-1} = m^d (mod N)$
+\end{itemize}
 
 \section{Mixing}
 \begin{enumerate}
