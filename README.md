@@ -1,4 +1,9 @@
 # ECS198-Cryptocurrency-Technologies
+The class materials for ECS 198 - Cryptocurrency Technologies, Spring 2016 taught by Rylan Schaeffer and Vincent Yang.
+
+##### Important Materials
+* [Syllabus](https://cdn.rawgit.com/RylanSchaeffer/ECS198-Cryptocurrency-Technologies/master/Syllabus/Course-Syllabus.pdf)
+* [Term Project](https://cdn.rawgit.com/RylanSchaeffer/ECS198-Cryptocurrency-Technologies/master/Programs/Term-Project/Term-Project.pdf)
 
 ##### Assignments
 1. Digital Signatures
@@ -37,82 +42,42 @@ To be updated...
 
   If given list of transactions, verify the transactions, mine the correct nonce, append the block to block chain
 
-7.
-  
-8
-
-9.
-
 ##### Structure
 ```
 .
 ├── Lectures
 │   ├── 0-History
-│   │   ├── 0-History.aux
-│   │   ├── 0-History.log
-│   │   ├── 0-History.pdf
-│   │   ├── 0-History.synctex.gz
-│   │   └── 0-History.tex
 │   ├── 1-DigitalSignatures
-│   │   ├── 1-DigitalSignatures.aux
-│   │   ├── 1-DigitalSignatures.log
-│   │   ├── 1-DigitalSignatures.out
-│   │   ├── 1-DigitalSignatures.pdf
-│   │   └── 1-DigitalSignatures.tex
 │   ├── 2-CryptoHash
-│   │   ├── 2-CryptoHash.aux
-│   │   ├── 2-CryptoHash.log
-│   │   ├── 2-CryptoHash.pdf
-│   │   ├── 2-CryptoHash.synctex.gz
-│   │   └── 2-CryptoHash.tex
-│   ├── 3-CentralCrypto
-│   │   ├── 3-CentralCrypto.log
-│   │   └── 3-CentralCrypto.out
-│   └── 3-Centralization
-│       ├── 3-CentralCrypto.aux
-│       ├── 3-CentralCrypto.pdf
-│       └── 3-CentralCrypto.tex
+│   ├── 3-Decentralization
+│   ├── 4-Mining
+│   ├── 5-EngineeringDetails
+│   ├── 6-Flaws
+│   ├── 6.5-Blockchain
+│   ├── 7-Anonymity
+│   ├── 8-Ethereum
+│   └── 9-DAO
 ├── Programs
 │   ├── HW1-Digital-Signatures
-│   │   ├── SchaefferRylanHW1Submission.py
-│   │   ├── SchaefferRylanHW1Submission.pyc
-│   │   └── grader.py
-│   └── HW2-Crypto-Hash
-│       ├── SchaefferRylanHW2Submission.py
-│       ├── transactionGenerator.py
-│       └── transactions.txt
-├── README.md
+│   │   ├── Program\ 1
+│   │   └── Submissions
+│   ├── HW2-Crypto-Hash
+│   │   └── Program\ 2
+│   ├── HW3-Mining
+│   │   └── Program\ 3
+│   └── Term-Project
+├── Projects
 ├── Syllabus
-│   ├── Course-Syllabus.pdf
-│   └── Course-Syllabus.tex
-├── Worksheets
-│   ├── backup
-│   │   ├── hw1.aux
-│   │   ├── hw1.log
-│   │   ├── hw1.pdf
-│   │   ├── hw1.tex
-│   │   └── hw1.toc
-│   ├── exam
-│   │   ├── README
-│   │   ├── exam.cls
-│   │   ├── exam.md5
-│   │   ├── examdoc.pdf
-│   │   └── examdoc.tex
-│   ├── hw1
-│   │   ├── hw1.aux
-│   │   ├── hw1.log
-│   │   ├── hw1.pdf
-│   │   ├── hw1.tex
-│   ├── hw2
-│   ├── hw3
-│   │   └── hw3.tex
-│   ├── hw4
-│   ├── hw5
-│   ├── hw6
-│   ├── hw7
-│   ├── hw8
-│   └── hw9
-└── temp
-
-22 directories, 47 files
+└── Worksheets
+    ├── backup
+    ├── exam
+    ├── hw1
+    ├── hw2
+    ├── hw3
+    ├── hw4
+    ├── hw5
+    ├── hw6
+    ├── hw7
+    ├── hw8
+    └── hw9
 ```
